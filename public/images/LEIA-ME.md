@@ -91,21 +91,18 @@ Logotipos do ConEsquemas usados no cabeçalho e rodapé.
 
 ---
 
-## `edicao-anterior/`
+## Edição de 2026
 
-Material do **II ConEsquemas (2026)**, preservado na seção "Edição Anterior".
-Foi importado automaticamente do site em WordPress — normalmente não precisa de
-manutenção.
+**Não há pasta aqui.** A edição de 2026 tem site próprio, em
+`conesquemas26.softaliza.com.br`, e as fotos daquela edição vivem lá.
 
-| Pasta | Conteúdo |
-| --- | --- |
-| `palestrantes/` | 27 fotos dos palestrantes de 2026 |
-| `comissoes/` | 5 fotos da comissão de 2026 |
-| `local/` | Fotos do Centro de Eventos do Recife |
-| `galeria/` | 52 fotos do evento — a página lê a pasta automaticamente |
+As imagens que haviam sido importadas do WordPress (palestrantes, comissão,
+local e galeria) foram removidas quando o site de 2026 passou a ser separado.
+Se precisar delas de volta, estão no histórico do Git:
 
-> A galeria **não precisa de código**: qualquer `.jpg`, `.png` ou `.webp`
-> colocado em `edicao-anterior/galeria/` aparece na página após o próximo build.
+```bash
+git checkout cd45ed6~1 -- public/images/edicao-anterior
+```
 
 ---
 

@@ -197,10 +197,15 @@ git pull && npm ci && npm run build && pm2 restart conesquemas
 | `/faq` | 26 perguntas frequentes |
 | `/contato` | Canais de contato e newsletter |
 | `/obrigado` | Pós-compra (dispara `Purchase`) |
-| `/edicao-anterior` | Índice da edição de 2026 |
-| `/edicao-anterior/palestrantes` | 27 palestrantes de 2026 |
-| `/edicao-anterior/programacao` | Programação completa de 2026 |
-| `/edicao-anterior/galeria` | 52 fotos de 2026 |
+
+> **Edições anteriores** não é uma rota deste site: o item de menu aponta para
+> `conesquemas26.softaliza.com.br`, onde vive a edição de 2026. As rotas
+> `/edicao-anterior*` e `/edicao-passada` redirecionam para lá (301), para não
+> quebrar links antigos nem duplicar conteúdo. A URL fica em `siteEdicao2026`
+> (`src/data/navegacao.ts`) e nos `redirects` do `next.config.ts`.
+>
+> `/certificados` continua publicada e é citada no FAQ, mas saiu do menu
+> principal a pedido do cliente.
 
 ---
 
