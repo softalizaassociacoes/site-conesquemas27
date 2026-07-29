@@ -58,14 +58,12 @@ export default function Home() {
               </p>
 
               <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
-                <a
-                  href={evento.inscricaoUrl}
-                  target="_blank"
-                  rel="noreferrer"
+                <Link
+                  href="/inscricoes"
                   className="rounded-full bg-white/25 px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/35"
                 >
-                  Inscreva-se
-                </a>
+                  Valores e lotes
+                </Link>
                 <Link
                   href="/programacao"
                   className="rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white ring-1 ring-white/60 transition hover:bg-white/15"

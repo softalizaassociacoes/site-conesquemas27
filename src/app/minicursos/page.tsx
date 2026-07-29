@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Botao, Card, ListaFlor, PageHero, Section } from "@/components/ui";
-import { evento } from "@/data/evento";
 import { minicursos, minicursosInfo } from "@/data/minicursos";
 
 export const metadata: Metadata = {
@@ -79,13 +78,8 @@ export default function Minicursos() {
           ))}
         </ul>
 
-        <div className="mt-14 flex flex-wrap gap-3">
-          <Botao href={evento.inscricaoUrl} externo>
-            Inscrever-se e escolher meu minicurso
-          </Botao>
-          <Botao href="/inscricoes" variante="secundario">
-            Ver valores
-          </Botao>
+        <div className="mt-14">
+          <Botao href="/inscricoes">Ver valores e lotes</Botao>
         </div>
       </Section>
     </>

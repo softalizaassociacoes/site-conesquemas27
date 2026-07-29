@@ -258,9 +258,14 @@ material oficial enviado pelo cliente:
   inscrição) vieram do site da edição anterior, porque o guia pede o botão de
   WhatsApp e o link de inscrição sem informar os valores.
 
-Não há link para a **área do participante** em lugar nenhum: ela ainda não
-existe para esta edição. As menções em texto na página de certificados e no
-edital vêm do guia e devem permanecer.
+O site **não linka para nenhum sistema externo do congresso**: nem a área do
+participante, nem a plataforma de inscrição — as duas ainda não existem para
+esta edição. Os CTAs levam à página interna `/inscricoes`, com valores, lotes e
+regulamento. As menções em texto à área do participante (certificados e edital)
+vêm do guia e devem permanecer.
+
+Quando a plataforma abrir, reponha `inscricaoUrl` em `src/data/evento.ts` — há
+um comentário no lugar exato — e volte a apontar os botões para ela.
 
 Ao atualizar, confira também `src/data/` — os comentários marcam a página do
 guia de onde cada bloco veio.

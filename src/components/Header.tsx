@@ -269,18 +269,6 @@ export default function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
-          <a
-            href={evento.inscricaoUrl}
-            target="_blank"
-            rel="noreferrer"
-            className={`rounded-full px-6 py-3 text-sm font-bold uppercase tracking-wide transition ${
-              sobreposto
-                ? "bg-white/15 text-white ring-1 ring-white/40 backdrop-blur hover:bg-white/25"
-                : "bg-plum-500 text-white shadow-sm hover:bg-plum-600"
-            }`}
-          >
-            Inscreva-se →
-          </a>
           <button
             type="button"
             onClick={() => setAberto((v) => !v)}
@@ -386,16 +374,6 @@ export default function Header() {
               ))}
             </ul>
 
-            <div className="mt-6">
-              <a
-                href={evento.inscricaoUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="block rounded-full bg-plum-500 px-6 py-3.5 text-center font-semibold text-white"
-              >
-                Inscreva-se
-              </a>
-            </div>
           </nav>
         </div>
       )}

@@ -43,11 +43,14 @@ export const evento = {
     youtube: "https://www.youtube.com/@ceppa.cursos",
   },
 
-  /**
-   * Plataforma de inscrições. A área do congressista ainda não existe para
-   * esta edição, por isso não há link para ela em lugar nenhum do site.
+  /*
+   * A plataforma de inscrição e a área do congressista ainda não existem para
+   * esta edição, então o site não linka para nenhuma das duas: os CTAs levam à
+   * página /inscricoes, com valores, lotes e regulamento.
+   *
+   * Quando a plataforma abrir, reponha aqui a URL (inscricaoUrl) e volte a
+   * apontar os botões de "Inscreva-se" para ela.
    */
-  inscricaoUrl: "https://app.ciente.studio/conesquemas",
 
   /** Meta Pixel — Guia, p. 4. */
   pixelId: "622935097150845",

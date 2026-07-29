@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Countdown from "@/components/Countdown";
 import {
+  AvisoDados,
   Botao,
   Card,
   ListaFlor,
@@ -123,13 +124,17 @@ export default function Inscricoes() {
           </Card>
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Botao href={evento.inscricaoUrl} externo>
-            Fazer minha inscrição
-          </Botao>
-          <Botao href="/faq" variante="secundario">
-            Tirar dúvidas no FAQ
-          </Botao>
+        <div className="mt-10">
+          <AvisoDados>
+            As inscrições abrem com o <strong>Lote Zero</strong>, em{" "}
+            {evento.loteZero.rotulo}. O link para a plataforma será divulgado
+            aqui e nas redes oficiais.
+          </AvisoDados>
+          <div className="mt-6">
+            <Botao href="/faq" variante="secundario">
+              Tirar dúvidas no FAQ
+            </Botao>
+          </div>
         </div>
       </Section>
 

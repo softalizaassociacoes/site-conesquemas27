@@ -127,7 +127,7 @@ export default function Submissoes() {
             lembrando que é preciso estar inscrito para submeter.
           </AvisoDados>
           <div className="mt-6">
-            <Botao href="/inscricoes">Fazer minha inscrição</Botao>
+            <Botao href="/inscricoes">Ver valores e lotes</Botao>
           </div>
         </div>
       </Section>

@@ -78,11 +78,9 @@ export default function SobreOEvento() {
           ))}
         </ul>
         <div className="mt-10 flex flex-wrap gap-3">
-          <Botao href={evento.inscricaoUrl} externo>
-            Fazer minha inscrição
-          </Botao>
-          <Botao href="/inscricoes" variante="secundario">
-            Ver valores e lotes
+          <Botao href="/inscricoes">Ver valores e lotes</Botao>
+          <Botao href="/faq" variante="secundario">
+            Tirar dúvidas no FAQ
           </Botao>
         </div>
       </Section>
