@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { navegacao } from "@/data/navegacao";
 import { evento } from "@/data/evento";
 
@@ -11,6 +11,33 @@ export default function Header() {
   const [aberto, setAberto] = useState(false);
   const [submenuAberto, setSubmenuAberto] = useState<string | null>(null);
   const [rolou, setRolou] = useState(false);
+  const [dropdown, setDropdown] = useState<string | null>(null);
+  const timerFechar = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  /**
+   * Abre/fecha os submenus com uma folga ao sair: sem ela, qualquer desvio do
+   * mouse no caminho até o painel fecha o menu antes de dar tempo de clicar.
+   */
+  const abrirDropdown = (rotulo: string) => {
+    if (timerFechar.current) clearTimeout(timerFechar.current);
+    setDropdown(rotulo);
+  };
+
+  const fecharDropdownComFolga = () => {
+    if (timerFechar.current) clearTimeout(timerFechar.current);
+    timerFechar.current = setTimeout(() => setDropdown(null), 280);
+  };
+
+  useEffect(() => {
+    const aoTeclar = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setDropdown(null);
+    };
+    window.addEventListener("keydown", aoTeclar);
+    return () => {
+      window.removeEventListener("keydown", aoTeclar);
+      if (timerFechar.current) clearTimeout(timerFechar.current);
+    };
+  }, []);
 
   // Fecha o menu ao navegar. Ajustar estado durante a renderização é o padrão
   // recomendado pelo React para reagir a uma mudança de prop/rota.
@@ -19,6 +46,7 @@ export default function Header() {
     setRotaAnterior(pathname);
     setAberto(false);
     setSubmenuAberto(null);
+    setDropdown(null);
   }
 
   useEffect(() => {
@@ -133,41 +161,84 @@ export default function Header() {
         >
           <ul className="flex max-w-2xl flex-wrap justify-center gap-x-1 gap-y-1">
             {navegacao.map((item) => (
-              <li key={item.rotulo} className="group relative">
-                <Link
-                  {...propsLink(item.href, item.externo)}
-                  className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-sm font-semibold uppercase tracking-wide transition ${
+              <li
+                key={item.rotulo}
+                className="relative"
+                onMouseEnter={() =>
+                  item.filhos && abrirDropdown(item.rotulo)
+                }
+                onMouseLeave={() => item.filhos && fecharDropdownComFolga()}
+              >
+                <span
+                  className={`flex items-center rounded-full transition ${
                     sobreposto
-                      ? ativo(item.href)
-                        ? "text-white"
-                        : "text-white/75 hover:text-white"
+                      ? ""
                       : ativo(item.href)
-                        ? "bg-plum-50 text-plum-600"
-                        : "text-brand-700 hover:bg-brand-50 hover:text-plum-600"
+                        ? "bg-plum-50"
+                        : "hover:bg-brand-50"
                   }`}
                 >
-                  {item.rotulo}
-                  {item.filhos && (
-                    <svg
-                      className="h-3 w-3 transition group-hover:rotate-180"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M3 4.5 6 7.5 9 4.5"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  )}
-                </Link>
+                  <Link
+                    {...propsLink(item.href, item.externo)}
+                    onFocus={() => item.filhos && abrirDropdown(item.rotulo)}
+                    className={`py-1.5 pl-3 text-sm font-semibold uppercase tracking-wide transition ${
+                      item.filhos ? "pr-1" : "pr-3"
+                    } ${
+                      sobreposto
+                        ? ativo(item.href)
+                          ? "text-white"
+                          : "text-white/75 hover:text-white"
+                        : ativo(item.href)
+                          ? "text-plum-600"
+                          : "text-brand-700 hover:text-plum-600"
+                    }`}
+                  >
+                    {item.rotulo}
+                  </Link>
 
-                {item.filhos && (
-                  <div className="invisible absolute left-1/2 top-full w-72 -translate-x-1/2 pt-2 opacity-0 transition group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
-                    <div className="overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-xl shadow-brand-900/15">
+                  {/* Botão à parte: sem ele o submenu ficaria inacessível em
+                      telas de toque, onde não existe hover. */}
+                  {item.filhos && (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        dropdown === item.rotulo
+                          ? setDropdown(null)
+                          : abrirDropdown(item.rotulo)
+                      }
+                      aria-expanded={dropdown === item.rotulo}
+                      aria-label={`Abrir submenu de ${item.rotulo}`}
+                      className={`py-1.5 pr-3 pl-1 transition ${
+                        sobreposto
+                          ? "text-white/75 hover:text-white"
+                          : "text-brand-500 hover:text-plum-600"
+                      }`}
+                    >
+                      <svg
+                        className={`h-3 w-3 transition ${
+                          dropdown === item.rotulo ? "rotate-180" : ""
+                        }`}
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M3 4.5 6 7.5 9 4.5"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  )}
+                </span>
+
+                {item.filhos && dropdown === item.rotulo && (
+                  // pt-3 cria a ponte entre o gatilho e o painel, para o
+                  // ponteiro nunca sair da área que mantém o menu aberto.
+                  <div className="absolute left-1/2 top-full z-10 w-72 -translate-x-1/2 pt-3">
+                    <div className="overflow-hidden rounded-2xl border border-brand-100 bg-white shadow-xl shadow-brand-900/25">
                       {item.filhos.map((filho) => (
                         <Link
                           key={filho.href}
