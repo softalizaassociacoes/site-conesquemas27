@@ -1,7 +1,12 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/data/evento";
+import { siteIndexavel, siteUrl } from "@/data/evento";
 
 export default function robots(): MetadataRoute.Robots {
+  // Em homologação, bloqueia tudo e não anuncia o sitemap.
+  if (!siteIndexavel) {
+    return { rules: { userAgent: "*", disallow: "/" } };
+  }
+
   return {
     rules: {
       userAgent: "*",

@@ -43,9 +43,11 @@ export const evento = {
     youtube: "https://www.youtube.com/@ceppa.cursos",
   },
 
-  /** Plataforma de inscrições / área do congressista. */
+  /**
+   * Plataforma de inscrições. A área do congressista ainda não existe para
+   * esta edição, por isso não há link para ela em lugar nenhum do site.
+   */
   inscricaoUrl: "https://app.ciente.studio/conesquemas",
-  areaParticipanteUrl: "https://app.ciente.studio/conesquemas",
 
   /** Meta Pixel — Guia, p. 4. */
   pixelId: "622935097150845",
@@ -85,4 +87,20 @@ export const edicaoAnterior = {
   },
 } as const;
 
-export const siteUrl = "https://conesquemas.com.br";
+/**
+ * Endereço público do site. Alimenta o sitemap, o robots.txt e as tags
+ * Open Graph. Enquanto está em validação, aponta para o domínio de homologação.
+ * Ao migrar para o domínio definitivo, defina NEXT_PUBLIC_SITE_URL.
+ */
+export const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://conesquemas27.softaliza.com.br";
+
+/**
+ * Indexação por buscadores. Fica DESLIGADA por padrão: o site está em
+ * homologação e não deve aparecer no Google, nem competir com o domínio
+ * oficial por conteúdo duplicado.
+ *
+ * Para liberar, na virada para o domínio definitivo, defina no ambiente:
+ *   NEXT_PUBLIC_SITE_INDEXAVEL=true
+ */
+export const siteIndexavel = process.env.NEXT_PUBLIC_SITE_INDEXAVEL === "true";

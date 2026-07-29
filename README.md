@@ -179,11 +179,29 @@ Depois, emita o certificado:
 certbot --nginx -d conesquemas.softaliza.com.br
 ```
 
-### 4. Ao trocar para o domínio definitivo
+### 4. Indexação (importante)
 
-Quando o site sair de validação e for para `conesquemas.com.br`, atualize
-`siteUrl` em `src/data/evento.ts` — ele alimenta o sitemap, o `robots.txt` e as
-tags Open Graph.
+**O site está bloqueado para buscadores.** Enquanto roda em
+`conesquemas27.softaliza.com.br`, ele não pode aparecer no Google nem competir
+com o domínio oficial por conteúdo duplicado. O bloqueio é feito em três
+camadas, todas ligadas à mesma variável:
+
+- `robots.txt` responde `Disallow: /`
+- cabeçalho HTTP `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet`
+- `<meta name="robots" content="noindex, nofollow, nocache">` em todas as páginas
+
+### 5. Ao trocar para o domínio definitivo
+
+Na virada para `conesquemas.com.br`, defina as duas variáveis de ambiente:
+
+| Variável | Valor |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | `https://conesquemas.com.br` |
+| `NEXT_PUBLIC_SITE_INDEXAVEL` | `true` |
+
+A primeira alimenta o sitemap, o `robots.txt` e as tags Open Graph; a segunda
+libera a indexação. Sem a segunda, o site continua invisível para o Google —
+**não esqueça dela no dia da virada.**
 
 ### Atualizações
 
@@ -239,6 +257,10 @@ material oficial enviado pelo cliente:
 - **Contatos operacionais** (WhatsApp da central e URL da plataforma de
   inscrição) vieram do site da edição anterior, porque o guia pede o botão de
   WhatsApp e o link de inscrição sem informar os valores.
+
+Não há link para a **área do participante** em lugar nenhum: ela ainda não
+existe para esta edição. As menções em texto na página de certificados e no
+edital vêm do guia e devem permanecer.
 
 Ao atualizar, confira também `src/data/` — os comentários marcam a página do
 guia de onde cada bloco veio.

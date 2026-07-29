@@ -29,6 +29,10 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
+    // Enquanto o site está em homologação, o cabeçalho HTTP reforça o noindex
+    // e cobre também o que não é HTML (imagens, sitemap, PDFs).
+    const indexavel = process.env.NEXT_PUBLIC_SITE_INDEXAVEL === "true";
+
     return [
       {
         source: "/:path*",
@@ -36,6 +40,14 @@ const nextConfig: NextConfig = {
           { key: "X-Content-Type-Options", value: "nosniff" },
           { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
           { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          ...(indexavel
+            ? []
+            : [
+                {
+                  key: "X-Robots-Tag",
+                  value: "noindex, nofollow, noarchive, nosnippet",
+                },
+              ]),
         ],
       },
     ];

@@ -23,14 +23,12 @@ export default function Obrigado() {
           </p>
           <h1 className="mt-6 text-3xl text-brand-800 sm:text-4xl">Obrigado!</h1>
           <p className="mt-4 text-lg leading-relaxed text-brand-600">
-            Você está quase lá. Acesse a Área do Participante para concluir e
-            acompanhar sua inscrição no {evento.nome}.
+            Recebemos sua inscrição no {evento.nome}. Você receberá a
+            confirmação e as próximas orientações por e-mail.
           </p>
 
           <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <Botao href={evento.areaParticipanteUrl} externo>
-              Acessar Área do Participante
-            </Botao>
+            <Botao href="/programacao">Ver a programação</Botao>
             <Botao href="/" variante="secundario">
               Voltar para a home
             </Botao>

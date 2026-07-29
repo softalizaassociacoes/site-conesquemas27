@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
-import { Botao, Card, ListaFlor, PageHero, Section, SectionTitle } from "@/components/ui";
+import {
+  AvisoDados,
+  Botao,
+  Card,
+  ListaFlor,
+  PageHero,
+  Section,
+  SectionTitle,
+} from "@/components/ui";
 import { evento } from "@/data/evento";
 import {
   eixosTematicos,
@@ -112,13 +120,15 @@ export default function Submissoes() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-3">
-          <Botao href={evento.areaParticipanteUrl} externo>
-            Submeter pela área do participante
-          </Botao>
-          <Botao href="/inscricoes" variante="secundario">
-            Fazer minha inscrição
-          </Botao>
+        <div className="mt-10">
+          <AvisoDados>
+            As submissões abrem em <strong>07/08/2026</strong>, pela área do
+            congressista. O link será divulgado aqui e nas redes oficiais —
+            lembrando que é preciso estar inscrito para submeter.
+          </AvisoDados>
+          <div className="mt-6">
+            <Botao href="/inscricoes">Fazer minha inscrição</Botao>
+          </div>
         </div>
       </Section>
     </>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { AvisoDados, Botao, Card, ListaFlor, PageHero, Section } from "@/components/ui";
+import { AvisoDados, Card, ListaFlor, PageHero, Section } from "@/components/ui";
 import { evento } from "@/data/evento";
 
 export const metadata: Metadata = {
@@ -54,15 +54,12 @@ export default function Certificados() {
           </div>
         </Card>
 
-        <div className="mt-8 space-y-6">
+        <div className="mt-8">
           <AvisoDados>
             A emissão dos certificados do III ConEsquemas será liberada após o
             encerramento do congresso, em maio de 2027. Esta página será
             atualizada com o link de acesso.
           </AvisoDados>
-          <Botao href={evento.areaParticipanteUrl} externo>
-            Acessar área do participante
-          </Botao>
         </div>
       </Section>
     </>

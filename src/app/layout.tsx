@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MetaPixel from "@/components/MetaPixel";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import { evento, siteUrl } from "@/data/evento";
+import { evento, siteIndexavel, siteUrl } from "@/data/evento";
 import "./globals.css";
 
 const display = Fraunces({
@@ -50,7 +50,14 @@ export const metadata: Metadata = {
     title: `${evento.nome} — ${evento.nomeCompleto}`,
     description: `${evento.datas.rotulo} · ${evento.local.nome}, ${evento.local.cidade}/${evento.local.uf}`,
   },
-  robots: { index: true, follow: true },
+  robots: siteIndexavel
+    ? { index: true, follow: true }
+    : {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: { index: false, follow: false },
+      },
 };
 
 export const viewport: Viewport = {

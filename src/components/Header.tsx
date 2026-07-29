@@ -270,28 +270,16 @@ export default function Header() {
 
         <div className="flex shrink-0 items-center gap-2">
           <a
-            href={evento.areaParticipanteUrl}
+            href={evento.inscricaoUrl}
             target="_blank"
             rel="noreferrer"
-            className={`hidden rounded-full px-6 py-3 text-sm font-bold uppercase tracking-wide transition lg:inline-block ${
+            className={`rounded-full px-6 py-3 text-sm font-bold uppercase tracking-wide transition ${
               sobreposto
                 ? "bg-white/15 text-white ring-1 ring-white/40 backdrop-blur hover:bg-white/25"
                 : "bg-plum-500 text-white shadow-sm hover:bg-plum-600"
             }`}
           >
-            Área do Participante →
-          </a>
-          <a
-            href={evento.inscricaoUrl}
-            target="_blank"
-            rel="noreferrer"
-            className={`rounded-full px-5 py-2.5 text-sm font-semibold transition sm:inline-block lg:hidden ${
-              sobreposto
-                ? "bg-white text-plum-600"
-                : "bg-plum-500 text-white hover:bg-plum-600"
-            }`}
-          >
-            Inscreva-se
+            Inscreva-se →
           </a>
           <button
             type="button"
@@ -398,7 +386,7 @@ export default function Header() {
               ))}
             </ul>
 
-            <div className="mt-6 space-y-3">
+            <div className="mt-6">
               <a
                 href={evento.inscricaoUrl}
                 target="_blank"
@@ -406,14 +394,6 @@ export default function Header() {
                 className="block rounded-full bg-plum-500 px-6 py-3.5 text-center font-semibold text-white"
               >
                 Inscreva-se
-              </a>
-              <a
-                href={evento.areaParticipanteUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="block rounded-full border border-brand-200 px-6 py-3.5 text-center font-semibold text-brand-700"
-              >
-                Área do Participante
               </a>
             </div>
           </nav>
