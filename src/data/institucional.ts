@@ -83,22 +83,17 @@ export const preRequisitos = [
 ];
 
 /**
- * Guia ConEsquemas, p. 8 — a organização do evento tem exatamente estes
- * quatro cargos. Só acrescente alguém aqui quando constar no guia.
+ * A comissão é exatamente quem está em public/images/comissoes — os cargos
+ * saem do nome de cada arquivo.
  *
- * O cliente enviou também a foto de Pollyanna Beul (Head de Marketing), que
- * não aparece no guia; por isso ela não está listada.
+ * Observação: o guia (p. 8) também cita Rodrigo Trapp na Direção Científica,
+ * mas não há foto dele nessa pasta; entra aqui quando a arte for enviada.
  */
 export const comissoes = [
   {
     cargo: "Presidência",
     nome: "Jullyanna Cardoso",
     foto: "/images/comissoes/Presidência_ Jullyanna Cardoso.png",
-  },
-  {
-    cargo: "Direção Científica",
-    nome: "Rodrigo Trapp",
-    foto: "/images/palestrantes/Rodrigo Trapp.png",
   },
   {
     cargo: "Secretária",
@@ -109,6 +104,11 @@ export const comissoes = [
     cargo: "Tesoureira",
     nome: "Sandra Barreiros",
     foto: "/images/comissoes/Sandra Barreiros - Tesoureira.png",
+  },
+  {
+    cargo: "Head de Marketing",
+    nome: "Pollyanna Beul",
+    foto: "/images/comissoes/Pollyanna Beul - Head de Marketing.png",
   },
 ];
 

@@ -77,21 +77,31 @@ Essa página está marcada como `noindex` e bloqueada no `robots.txt`.
 
 ## Formulário de captura de leads
 
-**Removido por ora**, aguardando a definição da ferramenta de e-mail marketing
-pelo cliente. No lugar, a home e a página de contato levam o visitante para o
-Instagram e o WhatsApp.
+Exigido pelo guia (p. 35). Aparece na home e na página de contato.
 
-A implementação completa (componente, endpoint com validação e armadilha
-anti-spam, e destino configurável por `LEADS_WEBHOOK_URL`) está no histórico,
-no commit `3abfe13` — para retomar:
+- **Componente:** `src/components/LeadForm.tsx`
+- **Endpoint:** `POST /api/leads` (`src/app/api/leads/route.ts`)
+- Valida nome, e-mail, telefone e categoria, tem campo-armadilha anti-spam e
+  dispara o evento `Lead` do Meta Pixel nos envios bem-sucedidos
+- Cada lead é **enviado por e-mail via SendGrid** para a organização, com
+  `reply_to` do próprio interessado — responder no e-mail já fala com ele
 
-```bash
-git checkout 3abfe13 -- src/components/LeadForm.tsx src/app/api/leads/route.ts
-```
+### Configuração obrigatória
 
-Depois é só reinserir `<LeadForm />` nas páginas desejadas. Note que, em
-serverless, a gravação em disco não funciona: é obrigatório definir
-`LEADS_WEBHOOK_URL` apontando para um CRM, automação ou planilha.
+Sem `SENDGRID_API_KEY` o endpoint responde **503** e apenas registra o lead no
+log. Defina as variáveis em *Vercel → Project Settings → Environment
+Variables* (ou no `.env` do servidor) e refaça o deploy:
+
+| Variável | Obrigatória | Para que serve |
+| --- | --- | --- |
+| `SENDGRID_API_KEY` | sim | Chave de API do SendGrid com permissão **Mail Send** |
+| `LEADS_EMAIL_DE` | não | Remetente. Precisa ser um **Verified Sender** no SendGrid. Padrão: e-mail oficial do congresso |
+| `LEADS_EMAIL_PARA` | não | Destinatário. Padrão: e-mail oficial do congresso |
+
+> Se o remetente não estiver verificado no SendGrid, a API devolve 403 e o
+> formulário mostra erro. O motivo exato aparece no log do servidor.
+
+Nunca comite a chave: o `.gitignore` já cobre `.env*`.
 
 ---
 
@@ -104,7 +114,7 @@ o build passa mas todas as rotas respondem `404: NOT_FOUND`.
 ### Vercel
 
 O deploy é automático a cada push na `main`. A única configuração necessária é
-a variável de ambiente `LEADS_WEBHOOK_URL` (veja a seção de leads acima).
+a variável `SENDGRID_API_KEY` (veja a seção de leads acima).
 
 Para liberar o acesso do cliente sem login, desative *Deployment Protection*
 em *Project Settings → Deployment Protection* — por padrão a Vercel exige
@@ -197,6 +207,7 @@ git pull && npm ci && npm run build && pm2 restart conesquemas
 | `/faq` | 26 perguntas frequentes |
 | `/contato` | Canais de contato e newsletter |
 | `/obrigado` | Pós-compra (dispara `Purchase`) |
+| `/api/leads` | Recebe o formulário e envia por e-mail (SendGrid) |
 
 > **Edições anteriores** não é uma rota deste site: o item de menu aponta para
 > `conesquemas26.softaliza.com.br`, onde vive a edição de 2026. As rotas
@@ -209,16 +220,32 @@ git pull && npm ci && npm run build && pm2 restart conesquemas
 
 ---
 
-## Pendências de conteúdo
+## Regra de conteúdo
 
-Itens que o guia enviado pelo cliente não cobre e que precisam ser solicitados
-à organização:
+**O guia do ConEsquemas é a fonte de verdade.** Todo dado publicado deve sair
+de lá; o que não estiver no guia não entra no site. Duas exceções, ambas
+material oficial enviado pelo cliente:
+
+- **Palestrantes e comissão** são exatamente quem está em
+  `public/images/palestrantes` e `public/images/comissoes`.
+- **Contatos operacionais** (WhatsApp da central e URL da plataforma de
+  inscrição) vieram do site da edição anterior, porque o guia pede o botão de
+  WhatsApp e o link de inscrição sem informar os valores.
+
+Ao atualizar, confira também `src/data/` — os comentários marcam a página do
+guia de onde cada bloco veio.
+
+## Pendências de conteúdo
 
 - Mini-currículo de 8 palestrantes (Aline Reis, Johnatan Felipe, Karen
   Szupszynski, Margareth Oliveira, Melissa Fioravante, Natanna Schutz e
   Renata Brasil)
-- Foto de Rodrigo Trapp no padrão visual da comissão
+- Foto de **Rodrigo Trapp** no padrão da comissão. O guia (p. 8) o cita na
+  Direção Científica, mas não há arte dele em `public/images/comissoes`, então
+  ele não aparece na página
 - **Logo do III ConEsquemas (2027)** em PNG/SVG com fundo transparente — o
   cabeçalho e o rodapé usam a assinatura em texto até lá
-- Grade horária detalhada da programação de 2027
+- **Patrocinadores e apoiadores de 2027.** Os grupos estão vazios: as marcas
+  que apareciam eram da edição de 2026 e o guia ainda está captando patrocínio
+- Grade horária da programação de 2027, data e horário dos minicursos
 - Edital de monitoria de 2027

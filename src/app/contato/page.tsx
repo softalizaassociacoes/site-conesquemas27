@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Botao, Card, PageHero, Section } from "@/components/ui";
+import LeadForm from "@/components/LeadForm";
+import { Botao, Card, PageHero, Section, SectionTitle } from "@/components/ui";
 import { evento } from "@/data/evento";
 
 export const metadata: Metadata = {
@@ -114,6 +115,15 @@ export default function Contato() {
               Escrever para a organização
             </Botao>
           </div>
+        </div>
+
+        <div className="mt-14 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <SectionTitle
+            rotulo="Fique por dentro"
+            titulo="Receba as novidades do congresso"
+            descricao="Editais, prazos e a abertura do Lote Zero direto no seu e-mail e WhatsApp."
+          />
+          <LeadForm />
         </div>
       </Section>
     </>
