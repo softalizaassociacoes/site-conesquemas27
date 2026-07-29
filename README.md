@@ -77,37 +77,21 @@ Essa página está marcada como `noindex` e bloqueada no `robots.txt`.
 
 ## Formulário de captura de leads
 
-- **Componente:** `src/components/LeadForm.tsx` (home e página de contato)
-- **Endpoint:** `POST /api/leads` (`src/app/api/leads/route.ts`)
-- Possui campo-armadilha anti-spam e validação de nome, e-mail, telefone e categoria
-- Dispara o evento `Lead` do Meta Pixel em envios bem-sucedidos
+**Removido por ora**, aguardando a definição da ferramenta de e-mail marketing
+pelo cliente. No lugar, a home e a página de contato levam o visitante para o
+Instagram e o WhatsApp.
 
-### Para onde vai o lead
+A implementação completa (componente, endpoint com validação e armadilha
+anti-spam, e destino configurável por `LEADS_WEBHOOK_URL`) está no histórico,
+no commit `3abfe13` — para retomar:
 
-O destino depende do ambiente, nesta ordem:
-
-| Condição | Destino |
-| --- | --- |
-| `LEADS_WEBHOOK_URL` definida | `POST` em JSON para a URL (CRM, Zapier/Make, planilha, e-mail marketing) |
-| Servidor próprio, sem webhook | `data/leads.ndjson` no disco — fora do Git, por conter dados pessoais |
-| Serverless, sem webhook | Responde **503** e grava o lead no log, em vez de aceitar e perder o contato |
-
-> **Na Vercel o disco é somente leitura**, então `LEADS_WEBHOOK_URL` é
-> obrigatória — sem ela o formulário não funciona. Configure em
-> *Project Settings → Environment Variables* e faça um novo deploy.
-
-Formato enviado ao webhook:
-
-```json
-{
-  "nome": "Maria Souza",
-  "email": "maria@exemplo.com",
-  "telefone": "(81) 99999-8888",
-  "categoria": "Estudante de graduação",
-  "recebidoEm": "2027-01-15T13:00:00.000Z",
-  "origem": "site-conesquemas-2027"
-}
+```bash
+git checkout 3abfe13 -- src/components/LeadForm.tsx src/app/api/leads/route.ts
 ```
+
+Depois é só reinserir `<LeadForm />` nas páginas desejadas. Note que, em
+serverless, a gravação em disco não funciona: é obrigatório definir
+`LEADS_WEBHOOK_URL` apontando para um CRM, automação ou planilha.
 
 ---
 

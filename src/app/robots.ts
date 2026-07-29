@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: "*",
       allow: "/",
       // Página de conversão do pixel — não deve ser indexada.
-      disallow: ["/obrigado", "/api/"],
+      disallow: ["/obrigado"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

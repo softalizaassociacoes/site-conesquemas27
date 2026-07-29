@@ -3,7 +3,6 @@ import Link from "next/link";
 import Carrossel from "@/components/Carrossel";
 import Countdown from "@/components/Countdown";
 import PalestrantesGrid from "@/components/PalestrantesGrid";
-import LeadForm from "@/components/LeadForm";
 import { Botao, Card, Section, SectionTitle } from "@/components/ui";
 import { evento, edicaoAnterior } from "@/data/evento";
 import { descricaoEvento, pilares } from "@/data/institucional";
@@ -232,17 +231,29 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* Captura de leads */}
+      {/* Acompanhe */}
       <Section>
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <SectionTitle
-              rotulo="Fique por dentro"
-              titulo="Receba em primeira mão a abertura do Lote Zero"
-              descricao="O Lote Zero dura apenas 24 horas e tem 25% de desconto sobre o 1º lote. Deixe seu contato e avisamos antes de abrir."
-            />
+        <div className="rounded-2xl bg-plum-50 px-6 py-12 text-center sm:px-12">
+          <p className="eyebrow justify-center">Fique por dentro</p>
+          <h2 className="mx-auto mt-3 max-w-2xl text-2xl text-brand-800 sm:text-3xl">
+            Não perca a abertura do Lote Zero
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl leading-relaxed text-brand-600">
+            São apenas 24 horas com 25% de desconto sobre o 1º lote. Editais,
+            prazos e novidades saem primeiro nas nossas redes oficiais.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Botao href={evento.redes.instagram} externo>
+              Seguir no Instagram
+            </Botao>
+            <Botao
+              href={`https://wa.me/${evento.contato.whatsapp[0].numero}`}
+              externo
+              variante="secundario"
+            >
+              Falar no WhatsApp
+            </Botao>
           </div>
-          <LeadForm />
         </div>
       </Section>
 
