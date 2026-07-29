@@ -101,7 +101,7 @@ local e galeria) foram removidas quando o site de 2026 passou a ser separado.
 Se precisar delas de volta, estão no histórico do Git:
 
 ```bash
-git checkout cd45ed6~1 -- public/images/edicao-anterior
+git checkout e16bcb7~1 -- public/images/edicao-anterior
 ```
 
 ---
