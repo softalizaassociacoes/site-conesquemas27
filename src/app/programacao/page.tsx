@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Botao, Card, ListaFlor, PageHero, Section, SectionTitle } from "@/components/ui";
 import { evento } from "@/data/evento";
 import { minicursos, minicursosInfo } from "@/data/minicursos";
+import { siteEdicao2026 } from "@/data/navegacao";
 
 export const metadata: Metadata = {
   title: "Programação",
@@ -111,8 +112,8 @@ export default function Programacao() {
           <Botao href="/minicursos" variante="secundario">
             Ver descrição dos minicursos
           </Botao>
-          <Botao href="/edicao-anterior/programacao" variante="secundario">
-            Ver a programação de 2026
+          <Botao href={siteEdicao2026} externo variante="secundario">
+            Ver a programação de 2026 ↗
           </Botao>
         </div>
       </Section>

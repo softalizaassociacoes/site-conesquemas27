@@ -16,10 +16,8 @@ const rotas = [
   { caminho: "/monitoria", prioridade: 0.5 },
   { caminho: "/faq", prioridade: 0.7 },
   { caminho: "/contato", prioridade: 0.6 },
-  { caminho: "/edicao-anterior", prioridade: 0.5 },
-  { caminho: "/edicao-anterior/palestrantes", prioridade: 0.4 },
-  { caminho: "/edicao-anterior/programacao", prioridade: 0.4 },
-  { caminho: "/edicao-anterior/galeria", prioridade: 0.4 },
+  // A edição de 2026 tem site próprio (conesquemas26.softaliza.com.br) e não
+  // entra neste sitemap.
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

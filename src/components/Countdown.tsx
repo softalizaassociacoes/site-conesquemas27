@@ -5,8 +5,12 @@ import { useSyncExternalStore } from "react";
 type Props = {
   /** Data-alvo em ISO com fuso, ex.: "2027-04-29T12:00:00-03:00". */
   alvo: string;
-  /** Aparência: sobre fundo escuro (hero) ou claro (cards). */
-  variante?: "claro" | "escuro";
+  /**
+   * claro  — caixas brancas sobre fundo claro
+   * escuro — caixas translúcidas sobre fundo roxo
+   * banner — números grandes soltos, sem caixa (hero da home)
+   */
+  variante?: "claro" | "escuro" | "banner";
 };
 
 const UNIDADES = [
@@ -50,6 +54,26 @@ export default function Countdown({ alvo, variante = "claro" }: Props) {
 
   const tempo = agora === null ? null : restante(alvoMs, agora);
   const escuro = variante === "escuro";
+
+  if (variante === "banner") {
+    return (
+      <ul
+        className="flex justify-center gap-5 sm:gap-9 lg:justify-start"
+        aria-label="Contagem regressiva"
+      >
+        {UNIDADES.map(({ chave, rotulo }) => (
+          <li key={chave} className="text-center">
+            <span className="block font-display text-4xl leading-none font-semibold tabular-nums text-white/85 sm:text-5xl lg:text-6xl">
+              {tempo ? String(tempo[chave]).padStart(2, "0") : "--"}
+            </span>
+            <span className="mt-2 block text-xs font-medium text-white/70 sm:text-sm">
+              {rotulo}
+            </span>
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   return (
     <ul

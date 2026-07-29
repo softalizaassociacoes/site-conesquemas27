@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Parisienne } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MetaPixel from "@/components/MetaPixel";
@@ -16,6 +16,14 @@ const display = Fraunces({
 const body = Inter({
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
+});
+
+/** Usada só na marca d'água decorativa das faixas roxas. */
+const manuscrito = Parisienne({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-manuscrito",
   display: "swap",
 });
 
@@ -55,7 +63,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${display.variable} ${body.variable} h-full antialiased`}
+      className={`${display.variable} ${body.variable} ${manuscrito.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
         <MetaPixel />

@@ -17,10 +17,14 @@ const nextConfig: NextConfig = {
 
   poweredByHeader: false,
 
-  // Preserva o SEO das URLs indexadas do site em WordPress que foram renomeadas.
+  // A edição de 2026 passou a ter site próprio. As URLs antigas do WordPress e
+  // as rotas internas que existiam aqui apontam para lá, preservando o SEO.
   async redirects() {
+    const site2026 = "https://conesquemas26.softaliza.com.br";
     return [
-      { source: "/edicao-passada", destination: "/edicao-anterior", permanent: true },
+      { source: "/edicao-passada", destination: site2026, permanent: true },
+      { source: "/edicao-anterior", destination: site2026, permanent: true },
+      { source: "/edicao-anterior/:path*", destination: site2026, permanent: true },
     ];
   },
 

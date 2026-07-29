@@ -1,8 +1,20 @@
+export type SubItemNav = {
+  rotulo: string;
+  href: string;
+  descricao?: string;
+  /** Abre em nova aba — usado para os sites das edições anteriores. */
+  externo?: boolean;
+};
+
 export type ItemNav = {
   rotulo: string;
   href: string;
-  filhos?: { rotulo: string; href: string; descricao?: string }[];
+  externo?: boolean;
+  filhos?: SubItemNav[];
 };
+
+/** Site da edição de 2026, mantido em domínio próprio. */
+export const siteEdicao2026 = "https://conesquemas26.softaliza.com.br";
 
 export const navegacao: ItemNav[] = [
   { rotulo: "Home", href: "/" },
@@ -30,11 +42,6 @@ export const navegacao: ItemNav[] = [
         href: "/local-do-evento",
         descricao: "RioMar Eventos, Recife e dicas de turismo",
       },
-      {
-        rotulo: "Edição Anterior",
-        href: "/edicao-anterior",
-        descricao: "Reviva o II ConEsquemas (2026)",
-      },
     ],
   },
   { rotulo: "Palestrantes", href: "/palestrantes" },
@@ -56,7 +63,19 @@ export const navegacao: ItemNav[] = [
   },
   { rotulo: "Submissões", href: "/submissoes" },
   { rotulo: "Inscrições", href: "/inscricoes" },
-  { rotulo: "Certificados", href: "/certificados" },
+  {
+    rotulo: "Edições anteriores",
+    href: siteEdicao2026,
+    externo: true,
+    filhos: [
+      {
+        rotulo: "II ConEsquemas · 2026",
+        href: siteEdicao2026,
+        descricao: "Palestrantes, programação e galeria da edição de 2026",
+        externo: true,
+      },
+    ],
+  },
   { rotulo: "Monitoria", href: "/monitoria" },
   { rotulo: "FAQ", href: "/faq" },
   { rotulo: "Contato", href: "/contato" },

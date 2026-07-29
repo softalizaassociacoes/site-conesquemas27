@@ -1,5 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import Margaridas from "./Margaridas";
+import Onda from "./Onda";
+import TextoManuscrito from "./TextoManuscrito";
 
 /** Cabeçalho padrão das páginas internas. */
 export function PageHero({
@@ -11,16 +14,11 @@ export function PageHero({
   descricao?: string;
   rotulo?: string;
 }) {
+  // O padding inferior é generoso porque a onda ocupa a base da faixa.
   return (
-    <section className="relative overflow-hidden bg-brand-800 py-16 text-white sm:py-20">
-      <div
-        className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-plum-500/30 blur-3xl"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -bottom-32 -left-16 h-72 w-72 rounded-full bg-rosa/20 blur-3xl"
-        aria-hidden="true"
-      />
+    <section className="relative overflow-hidden bg-linear-to-br from-brand-500 to-brand-600 pt-14 pb-24 text-white sm:pt-16 sm:pb-28">
+      <TextoManuscrito />
+      <Margaridas className="-right-24 -top-20 h-80 w-80 lg:h-[26rem] lg:w-[26rem]" />
       <div className="container-page relative">
         {rotulo && (
           <p className="mb-3 inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.22em] text-blush">
@@ -32,11 +30,12 @@ export function PageHero({
           {titulo}
         </h1>
         {descricao && (
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-brand-100 sm:text-lg">
+          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
             {descricao}
           </p>
         )}
       </div>
+      <Onda />
     </section>
   );
 }

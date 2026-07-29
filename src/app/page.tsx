@@ -2,66 +2,87 @@ import Image from "next/image";
 import Link from "next/link";
 import Carrossel from "@/components/Carrossel";
 import Countdown from "@/components/Countdown";
+import Margaridas from "@/components/Margaridas";
+import Onda from "@/components/Onda";
 import PalestrantesGrid from "@/components/PalestrantesGrid";
+import TextoManuscrito from "@/components/TextoManuscrito";
 import { Botao, Card, Section, SectionTitle } from "@/components/ui";
 import { evento, edicaoAnterior } from "@/data/evento";
 import { descricaoEvento, pilares } from "@/data/institucional";
 import { carrossel, minicursos } from "@/data/minicursos";
 import { palestrantes2027 } from "@/data/palestrantes";
 import { categorias, formatarBRL } from "@/data/lotes";
+import { siteEdicao2026 } from "@/data/navegacao";
 
 export default function Home() {
   const menorLoteZero = Math.min(...categorias.map((c) => c.lotes[0].valor));
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-brand-800 text-white">
-        <div
-          className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-plum-500/30 blur-3xl"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-rosa/20 blur-3xl"
-          aria-hidden="true"
-        />
+      {/* Banner — o cabeçalho fica sobreposto a esta faixa */}
+      <section className="relative overflow-hidden bg-linear-to-br from-brand-500 via-brand-500 to-brand-600 text-white">
+        <TextoManuscrito />
+        <Margaridas className="-right-24 -top-16 h-[30rem] w-[30rem] sm:-right-16 lg:h-[42rem] lg:w-[42rem]" />
+        <Margaridas className="-left-32 bottom-0 hidden h-80 w-80 rotate-180 lg:block" />
 
-        <div className="container-page relative py-14 sm:py-20">
-          <div className="mx-auto max-w-3xl text-center">
-            <Countdown alvo={evento.datas.inicioISO} variante="escuro" />
+        <div className="container-page relative pt-36 pb-24 sm:pt-40 lg:pt-44 lg:pb-36">
+          <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-12">
+            {/* Marca + contagem regressiva */}
+            <div className="text-center">
+              <p className="font-display text-3xl font-semibold tracking-[0.28em] text-white/90 sm:text-4xl lg:text-5xl">
+                CONESQUEMAS
+              </p>
+              <div className="mt-9 lg:mt-11">
+                <Countdown alvo={evento.datas.inicioISO} variante="banner" />
+              </div>
+            </div>
 
-            <p className="mt-8 inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.22em] text-blush">
-              <span className="h-px w-8 bg-rosa" aria-hidden="true" />
-              {evento.edicao} Edição
-              <span className="h-px w-8 bg-rosa" aria-hidden="true" />
-            </p>
+            {/* Chamada principal */}
+            <div className="text-center lg:text-left">
+              <h1 className="text-3xl leading-tight font-bold sm:text-4xl lg:text-[2.9rem]">
+                {evento.nomeCompleto}
+              </h1>
 
-            <h1 className="mt-4 text-3xl leading-tight sm:text-4xl lg:text-5xl">
-              {evento.nomeCompleto}
-            </h1>
+              <p className="mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 lg:justify-start">
+                <span className="text-sm font-semibold uppercase tracking-wide sm:text-base">
+                  {evento.datas.rotuloCurto}
+                </span>
+                <span className="rounded-full bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-white/90 ring-1 ring-white/25">
+                  Em breve
+                </span>
+              </p>
 
-            <p className="mt-5 text-lg font-medium text-blush sm:text-xl">
-              {evento.datas.rotulo}
-            </p>
-            <p className="mt-1.5 text-sm text-brand-100">
-              {evento.local.nome} · {evento.local.cidade}/{evento.local.uf}
-            </p>
+              <p className="mt-3 text-sm text-white/70">
+                {evento.local.nome} · {evento.local.cidade}/{evento.local.uf}
+              </p>
 
-            <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-brand-100 sm:text-lg">
-              {descricaoEvento.chamada}
-            </p>
-
-            <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Botao href={evento.inscricaoUrl} externo>
-                Inscreva-se
-              </Botao>
-              <Botao href="/programacao" variante="contorno-claro">
-                Programação
-              </Botao>
+              <div className="mt-9 flex flex-wrap justify-center gap-3 lg:justify-start">
+                <a
+                  href={evento.inscricaoUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="rounded-full bg-white/25 px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white ring-1 ring-white/30 backdrop-blur transition hover:bg-white/35"
+                >
+                  Inscreva-se
+                </a>
+                <Link
+                  href="/programacao"
+                  className="rounded-full px-8 py-3.5 text-sm font-bold uppercase tracking-wide text-white ring-1 ring-white/60 transition hover:bg-white/15"
+                >
+                  Programação
+                </Link>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="mx-auto mt-14 max-w-4xl">
+        <Onda />
+      </section>
+
+      {/* Carrossel de destaques */}
+      <section className="relative">
+        <div className="container-page -mt-4 pb-4 sm:-mt-8 lg:-mt-10">
+          <div className="mx-auto max-w-4xl">
             <Carrossel slides={carrossel} />
           </div>
         </div>
@@ -258,8 +279,11 @@ export default function Home() {
       </Section>
 
       {/* Edição anterior */}
-      <section className="bg-brand-800 py-16 text-white sm:py-20">
-        <div className="container-page text-center">
+      <section className="relative overflow-hidden bg-brand-600 py-20 text-white sm:py-24">
+        <TextoManuscrito className="opacity-60" />
+        <Margaridas className="-right-20 -bottom-24 h-72 w-72 lg:h-96 lg:w-96" />
+        <Onda invertida />
+        <div className="container-page relative text-center">
           <p className="mb-3 inline-flex items-center justify-center gap-2.5 text-xs font-bold uppercase tracking-[0.22em] text-blush">
             <span className="h-px w-8 bg-rosa" aria-hidden="true" />
             Edição anterior
@@ -267,13 +291,14 @@ export default function Home() {
           <h2 className="mx-auto mt-1 max-w-2xl text-2xl sm:text-3xl">
             Reviva o {edicaoAnterior.nome}
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-brand-100">
+          <p className="mx-auto mt-4 max-w-xl text-white/80">
             Local, palestrantes, programação completa e a galeria de fotos da
-            edição de {edicaoAnterior.ano} seguem disponíveis.
+            edição de {edicaoAnterior.ano} seguem disponíveis no site próprio da
+            edição.
           </p>
           <div className="mt-8">
-            <Botao href="/edicao-anterior" variante="contorno-claro">
-              Ver a edição de {edicaoAnterior.ano}
+            <Botao href={siteEdicao2026} externo variante="contorno-claro">
+              Ver a edição de {edicaoAnterior.ano} ↗
             </Botao>
           </div>
         </div>

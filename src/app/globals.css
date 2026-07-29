@@ -30,6 +30,7 @@
 
   --font-display: var(--font-display), Georgia, "Times New Roman", serif;
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-manuscrito: var(--font-manuscrito), "Segoe Script", cursive;
 
   --breakpoint-xs: 30rem;
 }

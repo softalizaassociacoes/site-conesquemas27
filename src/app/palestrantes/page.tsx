@@ -3,6 +3,7 @@ import PalestrantesGrid from "@/components/PalestrantesGrid";
 import { AvisoDados, Botao, PageHero, Section } from "@/components/ui";
 import { edicaoAnterior } from "@/data/evento";
 import { palestrantes2027 } from "@/data/palestrantes";
+import { siteEdicao2026 } from "@/data/navegacao";
 
 export const metadata: Metadata = {
   title: "Palestrantes",
@@ -27,8 +28,8 @@ export default function Palestrantes() {
             A lista de palestrantes pode receber novos nomes até a abertura do
             congresso. Acompanhe o site e as redes oficiais.
           </AvisoDados>
-          <Botao href="/edicao-anterior/palestrantes" variante="secundario">
-            Ver os palestrantes do {edicaoAnterior.nome}
+          <Botao href={siteEdicao2026} externo variante="secundario">
+            Ver os palestrantes do {edicaoAnterior.nome} ↗
           </Botao>
         </div>
       </Section>

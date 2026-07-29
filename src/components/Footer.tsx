@@ -74,8 +74,15 @@ export default function Footer() {
             <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm md:grid-cols-1">
               {navegacao.slice(1).map((item) => (
                 <li key={item.href}>
-                  <Link href={item.href} className="transition hover:text-blush">
+                  <Link
+                    href={item.href}
+                    {...(item.externo
+                      ? { target: "_blank", rel: "noreferrer" }
+                      : {})}
+                    className="transition hover:text-blush"
+                  >
                     {item.rotulo}
+                    {item.externo && <span aria-hidden="true"> ↗</span>}
                   </Link>
                 </li>
               ))}
