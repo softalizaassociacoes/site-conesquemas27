@@ -233,7 +233,9 @@ export type Parceiro = { nome: string; logo?: string; site?: string };
 export const parceiros: { titulo: string; marcas: Parceiro[] }[] = [
   {
     titulo: "Organização",
-    marcas: [{ nome: "CEPPA Cursos" }],
+    marcas: [
+      { nome: "CEPPA Cursos", logo: "/images/patrocinadores/ceppa.png" },
+    ],
   },
   {
     titulo: "Patrocínio",

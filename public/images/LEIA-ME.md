@@ -72,21 +72,27 @@ Para adicionar uma marca, inclua no grupo desejado (`Organização`,
 { nome: "Nome da Marca", logo: "/images/patrocinadores/arquivo.png" }
 ```
 
-Uma marca **sem** o campo `logo` é exibida como texto — é o caso atual do
-**CEPPA Cursos**, que ainda não teve o logo enviado.
+Uma marca **sem** o campo `logo` é exibida como texto, o que permite anunciar
+um patrocinador antes de receber a arte.
 
 ---
 
 ## `marca/`
 
-Logotipos do ConEsquemas usados no cabeçalho e rodapé.
+> ⚠️ **Falta o logo do III ConEsquemas (2027).** Hoje o cabeçalho e o rodapé
+> usam a assinatura em **texto** (`CONESQUEMAS` + `2027`), porque nenhum dos
+> arquivos disponíveis serve: são todos da edição de 2026 ou têm fundo chapado,
+> que aparecia como um retângulo branco sobre a faixa roxa.
+>
+> Quando a arte de 2027 chegar — **PNG ou SVG com fundo transparente** —
+> substitua o texto por `<Image>` em `src/components/Header.tsx` e
+> `src/components/Footer.tsx`. Há um comentário marcando o ponto exato nos dois.
 
-| Arquivo | Onde é usado |
+| Arquivo | Situação |
 | --- | --- |
-| `simbolo-conesquemas.png` | Símbolo no cabeçalho |
-| `logo-conesquemas.png` | Logo completo no rodapé |
-| `logo-conesquemas-branco.png` | Versão em branco (fundos escuros) |
-| `logo-conesquemas-alt.png` | Versão alternativa |
+| `logo-ii-conesquemas-2026.png` | Logo da **edição anterior**, com fundo creme. Não usar em 2027 |
+| `logo-conesquemas-branco.png` | Contorno em branco, sem o número da edição |
+| `logo-conesquemas-alt.png` | Recorte incompleto (só "ESQUEMAS"). Descartável |
 | `banner-home-2026.jpg` | Banner da edição de 2026 |
 
 ---

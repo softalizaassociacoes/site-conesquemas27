@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -102,33 +101,28 @@ export default function Header() {
 
       {/* Navegação */}
       <div className="container-page flex items-center justify-between gap-4 py-3 lg:items-start lg:py-4">
-        <Link href="/" className="flex shrink-0 items-center gap-3">
-          <Image
-            src="/images/marca/simbolo-conesquemas.png"
-            alt=""
-            width={48}
-            height={48}
-            className={`h-11 w-auto transition ${
-              sobreposto ? "brightness-0 invert" : ""
-            }`}
-            priority
-          />
+        {/*
+          Assinatura em texto: os arquivos de logo disponíveis são da edição de
+          2026 ("II CONESQUEMAS") e têm fundo chapado. Trocar por <Image>
+          quando a organização enviar a arte de 2027 em PNG/SVG transparente.
+        */}
+        <Link href="/" className="flex shrink-0 flex-col leading-none">
           <span className="sr-only">{evento.nomeCompleto}</span>
-          <span className="hidden leading-tight sm:block">
-            <span
-              className={`block font-display text-lg font-semibold tracking-[0.14em] transition-colors ${
-                sobreposto ? "text-white" : "text-brand-800"
-              }`}
-            >
-              CONESQUEMAS
-            </span>
-            <span
-              className={`block text-[0.68rem] font-semibold uppercase tracking-widest transition-colors ${
-                sobreposto ? "text-blush" : "text-plum-500"
-              }`}
-            >
-              {evento.ano}
-            </span>
+          <span
+            className={`font-display text-xl font-semibold tracking-[0.16em] transition-colors sm:text-2xl ${
+              sobreposto ? "text-white" : "text-brand-800"
+            }`}
+            aria-hidden="true"
+          >
+            CONESQUEMAS
+          </span>
+          <span
+            className={`mt-1 text-[0.7rem] font-bold uppercase tracking-[0.3em] transition-colors ${
+              sobreposto ? "text-blush" : "text-plum-500"
+            }`}
+            aria-hidden="true"
+          >
+            {evento.ano}
           </span>
         </Link>
 

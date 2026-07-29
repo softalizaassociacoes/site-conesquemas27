@@ -218,6 +218,7 @@ Itens que o guia enviado pelo cliente não cobre e que precisam ser solicitados
   Szupszynski, Margareth Oliveira, Melissa Fioravante, Natanna Schutz e
   Renata Brasil)
 - Foto de Rodrigo Trapp no padrão visual da comissão
-- Logo do CEPPA Cursos para o rodapé
+- **Logo do III ConEsquemas (2027)** em PNG/SVG com fundo transparente — o
+  cabeçalho e o rodapé usam a assinatura em texto até lá
 - Grade horária detalhada da programação de 2027
 - Edital de monitoria de 2027
