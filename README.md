@@ -79,17 +79,54 @@ Essa página está marcada como `noindex` e bloqueada no `robots.txt`.
 
 - **Componente:** `src/components/LeadForm.tsx` (home e página de contato)
 - **Endpoint:** `POST /api/leads` (`src/app/api/leads/route.ts`)
-- **Armazenamento atual:** `data/leads.ndjson` no disco do servidor
-  (um JSON por linha) — **fora do Git**, por conter dados pessoais
 - Possui campo-armadilha anti-spam e validação de nome, e-mail, telefone e categoria
 - Dispara o evento `Lead` do Meta Pixel em envios bem-sucedidos
 
-Para integrar com CRM ou e-mail marketing, substitua a função `registrar()`
-em `src/app/api/leads/route.ts` pela chamada da API desejada.
+### Para onde vai o lead
+
+O destino depende do ambiente, nesta ordem:
+
+| Condição | Destino |
+| --- | --- |
+| `LEADS_WEBHOOK_URL` definida | `POST` em JSON para a URL (CRM, Zapier/Make, planilha, e-mail marketing) |
+| Servidor próprio, sem webhook | `data/leads.ndjson` no disco — fora do Git, por conter dados pessoais |
+| Serverless, sem webhook | Responde **503** e grava o lead no log, em vez de aceitar e perder o contato |
+
+> **Na Vercel o disco é somente leitura**, então `LEADS_WEBHOOK_URL` é
+> obrigatória — sem ela o formulário não funciona. Configure em
+> *Project Settings → Environment Variables* e faça um novo deploy.
+
+Formato enviado ao webhook:
+
+```json
+{
+  "nome": "Maria Souza",
+  "email": "maria@exemplo.com",
+  "telefone": "(81) 99999-8888",
+  "categoria": "Estudante de graduação",
+  "recebidoEm": "2027-01-15T13:00:00.000Z",
+  "origem": "site-conesquemas-2027"
+}
+```
 
 ---
 
-## Deploy — conesquemas.softaliza.com.br
+## Deploy
+
+O projeto declara o preset do framework em `vercel.json`. **Não remova esse
+arquivo:** o projeto foi importado na Vercel sem detectar o Next.js e, sem ele,
+o build passa mas todas as rotas respondem `404: NOT_FOUND`.
+
+### Vercel
+
+O deploy é automático a cada push na `main`. A única configuração necessária é
+a variável de ambiente `LEADS_WEBHOOK_URL` (veja a seção de leads acima).
+
+Para liberar o acesso do cliente sem login, desative *Deployment Protection*
+em *Project Settings → Deployment Protection* — por padrão a Vercel exige
+autenticação e a URL redireciona para a tela de login.
+
+### Servidor próprio — conesquemas.softaliza.com.br
 
 O site roda em **Node com SSR** (`next start`), atrás de um proxy reverso.
 

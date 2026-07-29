@@ -5,9 +5,16 @@ import { NextResponse } from "next/server";
 /**
  * Captura de leads (Guia ConEsquemas, p. 35).
  *
- * Persistência: por padrão grava em NDJSON no disco do servidor
- * (data/leads.ndjson). Para integrar com CRM/e-mail marketing, basta
- * substituir `registrar()` pela chamada da API desejada.
+ * Destino do lead, nesta ordem:
+ *
+ * 1. `LEADS_WEBHOOK_URL`, se definida — encaminha o lead em JSON para um
+ *    CRM, Zapier/Make, planilha ou e-mail marketing. É a única opção que
+ *    funciona em hospedagem serverless (Vercel), onde o disco é somente
+ *    leitura fora de /tmp.
+ * 2. `data/leads.ndjson` no disco — usado em servidor próprio (PM2/VPS).
+ *
+ * Sem nenhuma das duas, o endpoint responde 503 e registra o lead no log,
+ * em vez de aceitar o envio silenciosamente e perder o contato.
  */
 
 export const runtime = "nodejs";
@@ -45,9 +52,80 @@ function validar(corpo: Record<string, unknown>) {
   return { lead };
 }
 
-async function registrar(lead: Lead & { recebidoEm: string; origem: string }) {
+type LeadRegistrado = Lead & { recebidoEm: string; origem: string };
+
+async function enviarParaWebhook(url: string, lead: LeadRegistrado) {
+  const resposta = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(lead),
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!resposta.ok) {
+    throw new Error(`Webhook respondeu ${resposta.status}`);
+  }
+}
+
+async function gravarEmDisco(lead: LeadRegistrado) {
   await mkdir(path.dirname(ARQUIVO), { recursive: true });
   await appendFile(ARQUIVO, JSON.stringify(lead) + "\n", "utf8");
+}
+
+/**
+ * Em serverless o bundle roda a partir de um diretório sem escrita.
+ * Na Vercel o mkdir falha com ENOENT (e não EROFS), por isso a checagem
+ * de ambiente vem antes: é determinística, não depende do errno.
+ */
+const SEM_DISCO_GRAVAVEL = Boolean(process.env.VERCEL);
+
+/** Códigos que, num append+mkdir, significam "não dá para escrever aqui". */
+function naoConsegueEscrever(erro: unknown) {
+  const codigo = (erro as NodeJS.ErrnoException)?.code;
+  return (
+    codigo === "EROFS" ||
+    codigo === "EACCES" ||
+    codigo === "EPERM" ||
+    codigo === "ENOENT"
+  );
+}
+
+async function registrar(lead: LeadRegistrado) {
+  const webhook = process.env.LEADS_WEBHOOK_URL;
+  if (webhook) {
+    await enviarParaWebhook(webhook, lead);
+    return;
+  }
+
+  if (SEM_DISCO_GRAVAVEL) {
+    console.error(
+      "[leads] Ambiente serverless sem LEADS_WEBHOOK_URL configurada. " +
+        "Configure a variável de ambiente para não perder contatos. Lead:",
+      JSON.stringify(lead),
+    );
+    throw new SemDestinoError();
+  }
+
+  try {
+    await gravarEmDisco(lead);
+  } catch (erro) {
+    if (naoConsegueEscrever(erro)) {
+      // Não dá para gravar e não há webhook: o lead se perderia em silêncio.
+      console.error(
+        "[leads] Disco somente leitura e LEADS_WEBHOOK_URL não configurada. " +
+          "Configure a variável de ambiente para não perder contatos. Lead:",
+        JSON.stringify(lead),
+      );
+      throw new SemDestinoError();
+    }
+    throw erro;
+  }
+}
+
+class SemDestinoError extends Error {
+  constructor() {
+    super("Nenhum destino configurado para os leads.");
+    this.name = "SemDestinoError";
+  }
 }
 
 export async function POST(request: Request) {
@@ -76,9 +154,14 @@ export async function POST(request: Request) {
     });
   } catch (erro) {
     console.error("Falha ao registrar lead:", erro);
+    const semDestino = erro instanceof SemDestinoError;
     return NextResponse.json(
-      { erro: "Não foi possível salvar seu contato. Tente novamente." },
-      { status: 500 },
+      {
+        erro: semDestino
+          ? "O cadastro está temporariamente indisponível. Fale com a gente pelo WhatsApp."
+          : "Não foi possível salvar seu contato. Tente novamente.",
+      },
+      { status: semDestino ? 503 : 500 },
     );
   }
 
