@@ -36,6 +36,20 @@
 }
 
 @layer base {
+  :root {
+    /* Altura do cabeçalho. A barra de contato só aparece a partir de lg, então
+       o valor muda de faixa. O Header refina isso em tempo real via
+       ResizeObserver; estes valores garantem o layout certo já na primeira
+       renderização, antes da hidratação. */
+    --altura-cabecalho: 4.5rem;
+  }
+
+  @media (min-width: 64rem) {
+    :root {
+      --altura-cabecalho: 7.5rem;
+    }
+  }
+
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;

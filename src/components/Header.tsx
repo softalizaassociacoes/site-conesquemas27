@@ -63,6 +63,25 @@ export default function Header() {
     return () => window.removeEventListener("scroll", aoRolar);
   }, []);
 
+  /**
+   * Publica a altura real do cabeçalho em --altura-cabecalho. Ela muda com a
+   * largura da tela (a barra de contato só aparece a partir de lg), então
+   * qualquer medida derivada precisa acompanhar em vez de assumir um valor.
+   */
+  const elementoHeader = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const el = elementoHeader.current;
+    if (!el) return;
+    const observador = new ResizeObserver(([entrada]) => {
+      document.documentElement.style.setProperty(
+        "--altura-cabecalho",
+        `${Math.round(entrada.contentRect.height)}px`,
+      );
+    });
+    observador.observe(el);
+    return () => observador.disconnect();
+  }, []);
+
   const ativo = (href: string) =>
     href.startsWith("http")
       ? false
@@ -85,6 +104,7 @@ export default function Header() {
 
   return (
     <header
+      ref={elementoHeader}
       className={`${
         pathname === "/" ? "fixed" : "sticky"
       } inset-x-0 top-0 z-50 transition-colors duration-300 ${
@@ -306,9 +326,13 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Menu mobile */}
+      {/* Menu mobile.
+          Ancorado em top-full para começar exatamente onde o cabeçalho
+          termina: a altura dele varia com a largura da tela, porque a barra de
+          contato só aparece a partir de lg. Com um valor fixo, o painel subia
+          sobre o próprio cabeçalho entre lg e xl. */}
       {aberto && (
-        <div className="fixed inset-x-0 bottom-0 top-18 overflow-y-auto bg-white xl:hidden">
+        <div className="absolute inset-x-0 top-full max-h-[calc(100dvh-var(--altura-cabecalho,4.5rem))] overflow-y-auto border-t border-brand-100 bg-white shadow-lg xl:hidden">
           <nav className="container-page py-6" aria-label="Principal (mobile)">
             <ul className="space-y-1">
               {navegacao.map((item) => (
