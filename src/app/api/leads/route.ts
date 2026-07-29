@@ -11,7 +11,8 @@ import { evento } from "@/data/evento";
  *   LEADS_EMAIL_DE    (opcional)    — remetente; precisa ser um Verified
  *                                     Sender no SendGrid. Padrão: e-mail
  *                                     oficial do congresso
- *   LEADS_EMAIL_PARA  (opcional)    — destinatário. Padrão: e-mail oficial
+ *   LEADS_EMAIL_PARA  (opcional)    — destinatários, separados por vírgula.
+ *                                     Padrão: DESTINATARIOS abaixo
  *
  * Sem SENDGRID_API_KEY o endpoint responde 503 e registra o lead no log, em
  * vez de aceitar o envio e perder o contato em silêncio.
@@ -22,6 +23,13 @@ export const dynamic = "force-dynamic";
 
 const LIMITE_CAMPO = 200;
 const SENDGRID_URL = "https://api.sendgrid.com/v3/mail/send";
+const ASSUNTO = "Conesquemas interesse";
+
+/** Quem recebe os leads. Sobrescreva com LEADS_EMAIL_PARA se precisar. */
+const DESTINATARIOS = [
+  "marcos@softaliza.com.br",
+  "conesquemas@ceppape.com.br",
+];
 
 type Lead = {
   nome: string;
@@ -63,7 +71,10 @@ function esc(valor: string) {
 
 function montarEmail(lead: Lead, recebidoEm: string) {
   const de = process.env.LEADS_EMAIL_DE ?? evento.contato.email;
-  const para = process.env.LEADS_EMAIL_PARA ?? evento.contato.email;
+  const para = (process.env.LEADS_EMAIL_PARA?.split(",") ?? DESTINATARIOS)
+    .map((e) => e.trim())
+    .filter(Boolean)
+    .map((email) => ({ email }));
 
   const linhas: [string, string][] = [
     ["Nome", lead.nome],
@@ -74,11 +85,11 @@ function montarEmail(lead: Lead, recebidoEm: string) {
   ];
 
   return {
-    personalizations: [{ to: [{ email: para }] }],
+    personalizations: [{ to: para }],
     from: { email: de, name: `${evento.nome} — Site` },
     // Responder vai direto para o interessado.
     reply_to: { email: lead.email, name: lead.nome },
-    subject: `Novo lead do site: ${lead.nome} (${lead.categoria})`,
+    subject: ASSUNTO,
     content: [
       {
         type: "text/plain",

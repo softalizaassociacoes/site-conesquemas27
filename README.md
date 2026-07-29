@@ -96,7 +96,10 @@ Variables* (ou no `.env` do servidor) e refaça o deploy:
 | --- | --- | --- |
 | `SENDGRID_API_KEY` | sim | Chave de API do SendGrid com permissão **Mail Send** |
 | `LEADS_EMAIL_DE` | não | Remetente. Precisa ser um **Verified Sender** no SendGrid. Padrão: e-mail oficial do congresso |
-| `LEADS_EMAIL_PARA` | não | Destinatário. Padrão: e-mail oficial do congresso |
+| `LEADS_EMAIL_PARA` | não | Destinatários, separados por vírgula. Padrão: `marcos@softaliza.com.br` e `conesquemas@ceppape.com.br` |
+
+O assunto é fixo: **“Conesquemas interesse”**. Destinatários e assunto ficam no
+topo de `src/app/api/leads/route.ts`.
 
 > Se o remetente não estiver verificado no SendGrid, a API devolve 403 e o
 > formulário mostra erro. O motivo exato aparece no log do servidor.
