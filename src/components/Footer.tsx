@@ -10,32 +10,34 @@ export default function Footer() {
       {/* Parceiros */}
       <div className="border-t border-brand-100 bg-sand/40 py-14">
         <div className="container-page space-y-10">
-          {parceiros.map((grupo) => (
-            <div key={grupo.titulo}>
-              <h2 className="mb-6 text-center text-xs font-bold uppercase tracking-[0.22em] text-plum-500">
-                {grupo.titulo}
-              </h2>
-              <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
-                {grupo.marcas.map((marca) => (
-                  <li key={marca.nome}>
-                    {marca.logo ? (
-                      <Image
-                        src={marca.logo}
-                        alt={marca.nome}
-                        width={200}
-                        height={80}
-                        className="h-12 w-auto object-contain opacity-80 transition hover:opacity-100 sm:h-14"
-                      />
-                    ) : (
-                      <span className="font-display text-xl font-semibold text-brand-700">
-                        {marca.nome}
-                      </span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {parceiros
+            .filter((grupo) => grupo.marcas.length > 0)
+            .map((grupo) => (
+              <div key={grupo.titulo}>
+                <h2 className="mb-6 text-center text-xs font-bold uppercase tracking-[0.22em] text-plum-500">
+                  {grupo.titulo}
+                </h2>
+                <ul className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
+                  {grupo.marcas.map((marca) => (
+                    <li key={marca.nome}>
+                      {marca.logo ? (
+                        <Image
+                          src={marca.logo}
+                          alt={marca.nome}
+                          width={200}
+                          height={80}
+                          className="h-12 w-auto object-contain opacity-80 transition hover:opacity-100 sm:h-14"
+                        />
+                      ) : (
+                        <span className="font-display text-xl font-semibold text-brand-700">
+                          {marca.nome}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
         </div>
       </div>
 

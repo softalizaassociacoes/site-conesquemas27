@@ -10,40 +10,6 @@ export const metadata: Metadata = {
     "Programação do III ConEsquemas 2027 — 29 e 30 de abril e 01 de maio, no RioMar Eventos, Recife/PE.",
 };
 
-const estrutura = [
-  {
-    dia: "Quinta-feira",
-    data: "29 de abril de 2027",
-    itens: [
-      "Credenciamento dos minicursos",
-      `Minicursos (${minicursosInfo.horario})`,
-      "Credenciamento geral",
-      "Cerimônia de abertura",
-      "Conferências de abertura e coquetel",
-    ],
-  },
-  {
-    dia: "Sexta-feira",
-    data: "30 de abril de 2027",
-    itens: [
-      "Conferências magnas em dois auditórios",
-      "Mesas-redondas e comunicações orais",
-      "Apresentação de pôsteres",
-      "Exposição comercial e lançamentos de livros",
-    ],
-  },
-  {
-    dia: "Sábado",
-    data: "01 de maio de 2027",
-    itens: [
-      "Conferências magnas em dois auditórios",
-      "Mesas-redondas e comunicações orais",
-      "Apresentação de pôsteres",
-      "Cerimônia de encerramento",
-    ],
-  },
-];
-
 export default function Programacao() {
   return (
     <>
@@ -54,45 +20,46 @@ export default function Programacao() {
       />
 
       <Section>
-        <div className="mb-10 rounded-2xl border border-dashed border-plum-200 bg-plum-50/60 px-6 py-6">
-          <p className="eyebrow mb-2">Em construção</p>
+        <div className="rounded-2xl border border-dashed border-plum-200 bg-plum-50/60 px-6 py-8">
+          <p className="eyebrow mb-2">Em breve</p>
           <h2 className="text-xl text-brand-800">
-            A grade completa será divulgada em breve
+            A programação científica ainda será divulgada
           </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-brand-600">
-            A comissão científica está finalizando os horários de cada
-            conferência, mesa e apresentação. Abaixo você já encontra a estrutura
-            dos três dias. Acompanhe o site e as redes oficiais para não perder a
-            publicação.
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-brand-600">
+            O cronograma com data, horário e local de cada conferência, mesa e
+            apresentação será publicado no site oficial e deverá ser
+            rigorosamente observado pelos autores. Acompanhe o site e nossas
+            redes oficiais para não perder a divulgação.
           </p>
         </div>
 
-        <ul className="grid gap-6 lg:grid-cols-3">
-          {estrutura.map((dia) => (
-            <li key={dia.dia}>
-              <Card className="h-full">
-                <p className="eyebrow mb-3">{dia.dia}</p>
-                <h3 className="text-xl text-brand-800">{dia.data}</h3>
-                <div className="mt-5">
-                  <ListaFlor itens={dia.itens} />
-                </div>
-              </Card>
-            </li>
-          ))}
-        </ul>
-
-        <p className="mt-8 text-sm text-brand-500">
-          A organização reserva-se o direito de alterar a programação (horários,
-          palestrantes e temas) por motivos de força maior, garantindo a qualidade
-          científica do evento.
-        </p>
+        <div className="mt-10">
+          <SectionTitle
+            rotulo="O que já está definido"
+            titulo="Modalidades da programação científica"
+          />
+          <ListaFlor
+            itens={[
+              "Conferências e mesas-redondas conduzidas por palestrantes convidados.",
+              "Comunicações orais, mesas redondas e pôsteres aprovados pela comissão científica, conforme o edital de submissão.",
+              "Minicursos, realizados uma única vez e escolhidos no ato da inscrição.",
+              "Exposição Comercial, com clínicas, editoras, testes psicológicos, recursos terapêuticos e materiais ligados à prática clínica e acadêmica.",
+            ]}
+          />
+          <p className="mt-8 max-w-3xl text-sm leading-relaxed text-brand-500">
+            A organização reserva-se o direito de alterar a programação
+            (horários, palestrantes e temas), sempre que necessário, por motivos
+            de força maior, garantindo a qualidade científica do evento. O
+            horário das palestras será definido pela comissão organizadora.
+          </p>
+        </div>
       </Section>
 
       <Section fundo="areia">
         <SectionTitle
           rotulo="Minicursos"
-          titulo="Abertura do congresso, na quinta-feira"
-          descricao={`${minicursosInfo.data} · ${minicursosInfo.horario} · gratuitos e exclusivos para inscritos, com certificado de ${minicursosInfo.cargaHoraria}.`}
+          titulo="Gratuitos e exclusivos para inscritos"
+          descricao={`Escolhidos no ato da inscrição, com certificado próprio de ${minicursosInfo.cargaHoraria}.`}
         />
         <ul className="grid gap-5 sm:grid-cols-3">
           {minicursos.map((mc) => (

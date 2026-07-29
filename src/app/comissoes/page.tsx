@@ -19,7 +19,7 @@ export default function Comissoes() {
       />
 
       <Section>
-        <ul className="grid grid-cols-2 gap-x-5 gap-y-9 sm:grid-cols-3 lg:grid-cols-5">
+        <ul className="mx-auto grid max-w-4xl grid-cols-2 gap-x-6 gap-y-9 sm:grid-cols-4">
           {comissoes.map((pessoa) => (
             <li key={pessoa.cargo} className="text-center">
               <div className="relative aspect-4/5 overflow-hidden rounded-2xl bg-brand-100">
@@ -27,7 +27,7 @@ export default function Comissoes() {
                   src={pessoa.foto}
                   alt={pessoa.nome}
                   fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                  sizes="(max-width: 640px) 50vw, 25vw"
                   className="object-cover"
                 />
               </div>

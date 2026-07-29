@@ -16,7 +16,7 @@ export default function Minicursos() {
       <PageHero
         rotulo="Minicursos"
         titulo="Gratuitos e exclusivos para inscritos"
-        descricao={`${minicursosInfo.data} · ${minicursosInfo.horario} · ${minicursosInfo.formato}`}
+        descricao={`${minicursosInfo.formato} · Certificado próprio de ${minicursosInfo.cargaHoraria}`}
       />
 
       <Section>
@@ -56,7 +56,7 @@ export default function Minicursos() {
                     Com {mc.facilitadores.join(", ")}
                   </p>
                   <p className="mt-1 text-sm text-brand-500">
-                    🕒 {minicursosInfo.horario} · {minicursosInfo.cargaHoraria}
+                    Carga horária: {minicursosInfo.cargaHoraria}
                   </p>
 
                   <div className="prosa mt-6 text-brand-600">

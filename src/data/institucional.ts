@@ -82,6 +82,13 @@ export const preRequisitos = [
   },
 ];
 
+/**
+ * Guia ConEsquemas, p. 8 — a organização do evento tem exatamente estes
+ * quatro cargos. Só acrescente alguém aqui quando constar no guia.
+ *
+ * O cliente enviou também a foto de Pollyanna Beul (Head de Marketing), que
+ * não aparece no guia; por isso ela não está listada.
+ */
 export const comissoes = [
   {
     cargo: "Presidência",
@@ -102,11 +109,6 @@ export const comissoes = [
     cargo: "Tesoureira",
     nome: "Sandra Barreiros",
     foto: "/images/comissoes/Sandra Barreiros - Tesoureira.png",
-  },
-  {
-    cargo: "Head de Marketing",
-    nome: "Pollyanna Beul",
-    foto: "/images/comissoes/Pollyanna Beul - Head de Marketing.png",
   },
 ];
 
@@ -230,26 +232,24 @@ export const politicaInscricoes = {
 /** `logo` ausente = a marca é renderizada como texto até o arquivo ser enviado. */
 export type Parceiro = { nome: string; logo?: string; site?: string };
 
+/**
+ * Só entram marcas confirmadas para 2027.
+ *
+ * Os grupos "Patrocínio" e "Apoio" estão vazios de propósito: as marcas que
+ * apareciam aqui (Insere, Editora Vetor, SINOPS, Hogrefe e Vínculos) eram da
+ * edição de 2026 e não constam no guia de 2027, que ainda está captando
+ * patrocínio. Os arquivos seguem em public/images/patrocinadores — basta
+ * reinserir a marca no grupo quando o contrato for fechado.
+ *
+ * Grupos sem marcas não são renderizados.
+ */
 export const parceiros: { titulo: string; marcas: Parceiro[] }[] = [
   {
-    titulo: "Organização",
+    titulo: "Realização",
     marcas: [
       { nome: "CEPPA Cursos", logo: "/images/patrocinadores/ceppa.png" },
     ],
   },
-  {
-    titulo: "Patrocínio",
-    marcas: [
-      { nome: "Insere", logo: "/images/patrocinadores/insere.png" },
-      { nome: "Editora Vetor", logo: "/images/patrocinadores/editora-vetor.png" },
-      { nome: "SINOPS", logo: "/images/patrocinadores/sinops.png" },
-    ],
-  },
-  {
-    titulo: "Apoio",
-    marcas: [
-      { nome: "Hogrefe", logo: "/images/patrocinadores/hogrefe.png" },
-      { nome: "Vínculos", logo: "/images/patrocinadores/vinculos.png" },
-    ],
-  },
+  { titulo: "Patrocínio", marcas: [] },
+  { titulo: "Apoio", marcas: [] },
 ];

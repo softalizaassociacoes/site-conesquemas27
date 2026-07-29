@@ -20,9 +20,12 @@ export const carrossel = [1, 2, 3, 4, 5, 6].map((n) => ({
   alt: `III ConEsquemas 2027 — destaque ${n}`,
 }));
 
+/**
+ * O guia não informa data e horário dos minicursos de 2027 — só a carga
+ * horária (FAQ, p. 22) e as regras (p. 7 e 21). Não invente os horários aqui:
+ * preencha quando a organização divulgar.
+ */
 export const minicursosInfo = {
-  data: "29 de abril de 2027",
-  horario: "13h às 16h",
   formato: "Presencial — RioMar Eventos, Recife/PE",
   cargaHoraria: "3 horas",
   regras: [
