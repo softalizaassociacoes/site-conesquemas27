@@ -8,14 +8,13 @@ import { evento } from "@/data/evento";
  *
  * Variáveis de ambiente:
  *   SENDGRID_API_KEY  (obrigatória) — chave de API com permissão "Mail Send"
- *   LEADS_EMAIL_DE    (opcional)    — remetente; precisa ser um Verified
- *                                     Sender no SendGrid. Padrão: e-mail
- *                                     oficial do congresso
+ *   SENDGRID_EMAIL    (obrigatória) — remetente; precisa ser um Verified
+ *                                     Sender no SendGrid
  *   LEADS_EMAIL_PARA  (opcional)    — destinatários, separados por vírgula.
  *                                     Padrão: DESTINATARIOS abaixo
  *
- * Sem SENDGRID_API_KEY o endpoint responde 503 e registra o lead no log, em
- * vez de aceitar o envio e perder o contato em silêncio.
+ * Faltando a chave ou o remetente, o endpoint responde 503 e registra o lead
+ * no log, em vez de aceitar o envio e perder o contato em silêncio.
  */
 
 export const runtime = "nodejs";
@@ -69,8 +68,7 @@ function esc(valor: string) {
     .replace(/"/g, "&quot;");
 }
 
-function montarEmail(lead: Lead, recebidoEm: string) {
-  const de = process.env.LEADS_EMAIL_DE ?? evento.contato.email;
+function montarEmail(lead: Lead, remetente: string, recebidoEm: string) {
   const para = (process.env.LEADS_EMAIL_PARA?.split(",") ?? DESTINATARIOS)
     .map((e) => e.trim())
     .filter(Boolean)
@@ -86,7 +84,7 @@ function montarEmail(lead: Lead, recebidoEm: string) {
 
   return {
     personalizations: [{ to: para }],
-    from: { email: de, name: `${evento.nome} — Site` },
+    from: { email: remetente, name: `${evento.nome} — Site` },
     // Responder vai direto para o interessado.
     reply_to: { email: lead.email, name: lead.nome },
     subject: ASSUNTO,
@@ -112,20 +110,30 @@ function montarEmail(lead: Lead, recebidoEm: string) {
 }
 
 class SemDestinoError extends Error {
-  constructor() {
-    super("SENDGRID_API_KEY não configurada.");
+  constructor(faltando: string) {
+    super(`${faltando} não configurada.`);
     this.name = "SemDestinoError";
   }
 }
 
 async function enviar(lead: Lead, recebidoEm: string) {
   const chave = process.env.SENDGRID_API_KEY;
-  if (!chave) {
+  const remetente = process.env.SENDGRID_EMAIL?.trim();
+
+  // O remetente precisa ser um Verified Sender no SendGrid; usar o e-mail do
+  // congresso como padrão só produziria 403, então exigimos a variável.
+  const faltando = !chave
+    ? "SENDGRID_API_KEY"
+    : !remetente
+      ? "SENDGRID_EMAIL"
+      : null;
+
+  if (faltando || !remetente) {
     console.error(
-      "[leads] SENDGRID_API_KEY ausente — o contato abaixo não foi entregue:",
+      `[leads] ${faltando} ausente — o contato abaixo não foi entregue:`,
       JSON.stringify({ ...lead, recebidoEm }),
     );
-    throw new SemDestinoError();
+    throw new SemDestinoError(faltando ?? "SENDGRID_EMAIL");
   }
 
   const resposta = await fetch(SENDGRID_URL, {
@@ -134,7 +142,7 @@ async function enviar(lead: Lead, recebidoEm: string) {
       Authorization: `Bearer ${chave}`,
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(montarEmail(lead, recebidoEm)),
+    body: JSON.stringify(montarEmail(lead, remetente, recebidoEm)),
     signal: AbortSignal.timeout(10_000),
   });
 

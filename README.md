@@ -88,18 +88,23 @@ Exigido pelo guia (p. 35). Aparece na home e na página de contato.
 
 ### Configuração obrigatória
 
-Sem `SENDGRID_API_KEY` o endpoint responde **503** e apenas registra o lead no
-log. Defina as variáveis em *Vercel → Project Settings → Environment
-Variables* (ou no `.env` do servidor) e refaça o deploy:
+Faltando qualquer uma das obrigatórias, o endpoint responde **503** e apenas
+registra o lead no log — o nome da variável ausente aparece lá. Defina em
+*Vercel → Project Settings → Environment Variables* (ou no `.env` do servidor)
+e refaça o deploy:
 
 | Variável | Obrigatória | Para que serve |
 | --- | --- | --- |
 | `SENDGRID_API_KEY` | sim | Chave de API do SendGrid com permissão **Mail Send** |
-| `LEADS_EMAIL_DE` | não | Remetente. Precisa ser um **Verified Sender** no SendGrid. Padrão: e-mail oficial do congresso |
+| `SENDGRID_EMAIL` | sim | Remetente. Precisa ser um **Verified Sender** no SendGrid (*Settings → Sender Authentication*) |
 | `LEADS_EMAIL_PARA` | não | Destinatários, separados por vírgula. Padrão: `marcos@softaliza.com.br` e `conesquemas@ceppape.com.br` |
 
 O assunto é fixo: **“Conesquemas interesse”**. Destinatários e assunto ficam no
 topo de `src/app/api/leads/route.ts`.
+
+> O remetente é exigido de propósito, sem valor padrão: cair no e-mail do
+> congresso sem ele estar verificado no SendGrid só produziria erro 403 na
+> hora do envio, que é mais difícil de diagnosticar do que a falta da variável.
 
 > Se o remetente não estiver verificado no SendGrid, a API devolve 403 e o
 > formulário mostra erro. O motivo exato aparece no log do servidor.
@@ -116,8 +121,8 @@ o build passa mas todas as rotas respondem `404: NOT_FOUND`.
 
 ### Vercel
 
-O deploy é automático a cada push na `main`. A única configuração necessária é
-a variável `SENDGRID_API_KEY` (veja a seção de leads acima).
+O deploy é automático a cada push na `main`. A configuração necessária são as
+variáveis `SENDGRID_API_KEY` e `SENDGRID_EMAIL` (veja a seção de leads acima).
 
 Para liberar o acesso do cliente sem login, desative *Deployment Protection*
 em *Project Settings → Deployment Protection* — por padrão a Vercel exige
