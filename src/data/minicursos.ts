@@ -14,11 +14,21 @@ export type Minicurso = {
   imagem?: string;
 };
 
-/** Banners rotativos da home — public/images/carrossel (1058x389). */
-export const carrossel = [1, 2, 3, 4, 5, 6].map((n) => ({
-  src: `/images/carrossel/${n}.png`,
-  alt: `III ConEsquemas 2027 — destaque ${n}`,
-}));
+/**
+ * Banners rotativos da home — arquivos em public/images/carrossel, todos em
+ * 1058x389. Para acrescentar um slide, coloque a arte na pasta e some uma
+ * entrada aqui, na ordem em que deve aparecer.
+ */
+export const carrossel = [
+  ...[1, 2, 3, 4, 5, 6].map((n) => ({
+    src: `/images/carrossel/${n}.png`,
+    alt: `III ConEsquemas 2027 — destaque ${n}`,
+  })),
+  {
+    src: "/images/carrossel/7.jpg",
+    alt: "Primeiro e único Congresso de Práticas em Terapia do Esquema no mundo",
+  },
+];
 
 /**
  * O guia não informa data e horário dos minicursos de 2027 — só a carga
