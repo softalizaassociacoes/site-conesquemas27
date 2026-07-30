@@ -291,6 +291,23 @@ export default function Home() {
             edição de {edicaoAnterior.ano} seguem disponíveis no site próprio da
             edição.
           </p>
+          {/* Banner da edição de 2026, clicável para o site próprio dela. */}
+          <a
+            href={siteEdicao2026}
+            target="_blank"
+            rel="noreferrer"
+            className="mx-auto mt-10 block max-w-3xl overflow-hidden rounded-2xl ring-1 ring-white/25 transition hover:ring-white/60"
+          >
+            <Image
+              src="/images/marca/banner-home-2026.jpg"
+              alt={`Banner do ${edicaoAnterior.nome} — ${edicaoAnterior.datasRotulo}`}
+              width={1058}
+              height={389}
+              className="h-auto w-full"
+              sizes="(max-width: 48rem) 100vw, 768px"
+            />
+          </a>
+
           <div className="mt-8">
             <Botao href={siteEdicao2026} externo variante="contorno-claro">
               Ver a edição de {edicaoAnterior.ano} ↗
