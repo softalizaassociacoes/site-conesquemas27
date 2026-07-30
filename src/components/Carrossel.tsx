@@ -54,7 +54,7 @@ export default function Carrossel({ slides }: { slides: Slide[] }) {
               height={389}
               priority={i === 0}
               className="h-auto w-full"
-              sizes="(max-width: 1024px) 100vw, 1024px"
+              sizes="(max-width: 76rem) 100vw, 1216px"
             />
           </div>
         ))}

@@ -78,15 +78,6 @@ export default function Home() {
         <Onda />
       </section>
 
-      {/* Carrossel de destaques */}
-      <section className="relative">
-        <div className="container-page -mt-4 pb-4 sm:-mt-8 lg:-mt-10">
-          <div className="mx-auto max-w-4xl">
-            <Carrossel slides={carrossel} />
-          </div>
-        </div>
-      </section>
-
       {/* Lote Zero */}
       <section className="border-b border-plum-100 bg-plum-50">
         <div className="container-page flex flex-col items-center gap-6 py-8 text-center lg:flex-row lg:justify-between lg:text-left">
@@ -146,6 +137,11 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* Carrossel de destaques, logo abaixo do texto do evento. */}
+        <div className="mt-14">
+          <Carrossel slides={carrossel} />
         </div>
       </Section>
 
