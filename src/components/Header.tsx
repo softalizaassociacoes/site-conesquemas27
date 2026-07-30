@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -149,23 +150,24 @@ export default function Header() {
 
       {/* Navegação */}
       <div className="container-page flex items-center justify-between gap-4 py-3 lg:items-start lg:py-4">
-        {/*
-          Assinatura em texto: os arquivos de logo disponíveis são da edição de
-          2026 ("II CONESQUEMAS") e têm fundo chapado. Trocar por <Image>
-          quando a organização enviar a arte de 2027 em PNG/SVG transparente.
-        */}
-        <Link href="/" className="flex shrink-0 flex-col leading-none">
+        {/* Logo oficial. A versão branca é a mesma arte recolorida, para o
+            cabeçalho sobreposto à faixa roxa do banner. */}
+        <Link href="/" className="flex shrink-0 flex-col">
           <span className="sr-only">{evento.nomeCompleto}</span>
+          <Image
+            src={
+              sobreposto
+                ? "/images/marca/logo-conesquemas-branco.png"
+                : "/images/marca/logo-conesquemas.png"
+            }
+            alt=""
+            width={900}
+            height={76}
+            priority
+            className="h-4 w-auto sm:h-5"
+          />
           <span
-            className={`font-display text-xl font-semibold tracking-[0.16em] transition-colors sm:text-2xl ${
-              sobreposto ? "text-white" : "text-brand-800"
-            }`}
-            aria-hidden="true"
-          >
-            CONESQUEMAS
-          </span>
-          <span
-            className={`mt-1 text-[0.7rem] font-bold uppercase tracking-[0.3em] transition-colors ${
+            className={`mt-1.5 text-[0.7rem] font-bold uppercase tracking-[0.3em] transition-colors ${
               sobreposto ? "text-blush" : "text-plum-500"
             }`}
             aria-hidden="true"

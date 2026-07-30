@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Card, ListaFlor, PageHero, Section, SectionTitle } from "@/components/ui";
 import { evento } from "@/data/evento";
 import { sobreRecife } from "@/data/institucional";
@@ -63,6 +64,40 @@ export default function LocalDoEvento() {
               referrerPolicy="no-referrer-when-downgrade"
               className="h-96 w-full lg:h-full lg:min-h-112"
             />
+          </div>
+        </div>
+      </Section>
+
+      {/* E-book */}
+      <Section fundo="lilas" id="ebook">
+        <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14">
+          <Image
+            src="/images/ebook-recife-capa.jpg"
+            alt="Capa do e-book Recife por dentro — O Guia do Congressista sobre Recife"
+            width={800}
+            height={800}
+            className="mx-auto w-full max-w-xs rounded-2xl lg:max-w-none"
+            sizes="(max-width: 1024px) 20rem, 380px"
+          />
+          <div>
+            <SectionTitle
+              rotulo="E-book gratuito"
+              titulo="Recife por dentro"
+              descricao="O Guia do Congressista sobre Recife: o que ver, onde comer e como se locomover na cidade que recebe o congresso."
+            />
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="/Recife-por-dentro.pdf"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-plum-500 px-7 py-3.5 text-sm font-semibold text-white shadow-sm shadow-plum-500/25 transition hover:bg-plum-600"
+              >
+                Baixar o e-book (PDF, 6,8 MB)
+              </a>
+            </div>
+            <p className="mt-4 text-sm text-brand-500">
+              32 páginas · Organização {evento.realizacao}
+            </p>
           </div>
         </div>
       </Section>

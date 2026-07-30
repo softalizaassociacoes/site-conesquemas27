@@ -79,21 +79,32 @@ um patrocinador antes de receber a arte.
 
 ## `marca/`
 
-> ⚠️ **Falta o logo do III ConEsquemas (2027).** Hoje o cabeçalho e o rodapé
-> usam a assinatura em **texto** (`CONESQUEMAS` + `2027`), porque nenhum dos
-> arquivos disponíveis serve: são todos da edição de 2026 ou têm fundo chapado,
-> que aparecia como um retângulo branco sobre a faixa roxa.
->
-> Quando a arte de 2027 chegar — **PNG ou SVG com fundo transparente** —
-> substitua o texto por `<Image>` em `src/components/Header.tsx` e
-> `src/components/Footer.tsx`. Há um comentário marcando o ponto exato nos dois.
+Logo oficial enviado pelo cliente, recortado no limite da arte.
 
-| Arquivo | Situação |
+| Arquivo | Onde é usado |
 | --- | --- |
-| `logo-ii-conesquemas-2026.png` | Logo da **edição anterior**, com fundo creme. Não usar em 2027 |
-| `logo-conesquemas-branco.png` | Contorno em branco, sem o número da edição |
+| `logo-conesquemas.png` | Cabeçalho quando ele está sólido (páginas internas e ao rolar) |
+| `logo-conesquemas-branco.png` | Cabeçalho sobreposto ao banner roxo e rodapé |
+| `logo-ii-conesquemas-2026.png` | Logo da **edição anterior**. Não usar em 2027 |
 | `logo-conesquemas-alt.png` | Recorte incompleto (só "ESQUEMAS"). Descartável |
 | `banner-home-2026.jpg` | Banner da edição de 2026 |
+
+> A versão branca é a mesma arte recolorida por script, não um arquivo separado
+> do cliente. Se receber uma versão clara oficial, basta sobrescrever o arquivo.
+
+---
+
+## E-book "Recife por dentro"
+
+| Arquivo | O que é |
+| --- | --- |
+| `public/Recife-por-dentro.pdf` | O e-book, 32 páginas — baixado em `/local-do-evento#ebook` |
+| `images/ebook-recife-capa.jpg` | Mockup da capa exibido ao lado do botão |
+
+O original tinha **39,8 MB**. As imagens foram reamostradas para 150 DPI e
+recomprimidas, chegando a **6,8 MB** sem perda visível na leitura em tela.
+Ao substituir o arquivo, refaça essa compressão — 40 MB é download demais, e
+**atualize o tamanho citado no botão**, em `src/app/local-do-evento/page.tsx`.
 
 ---
 

@@ -42,6 +42,11 @@ export const navegacao: ItemNav[] = [
         href: "/local-do-evento",
         descricao: "RioMar Eventos, Recife e dicas de turismo",
       },
+      {
+        rotulo: "E-book: Recife por dentro",
+        href: "/local-do-evento#ebook",
+        descricao: "O guia do congressista sobre a cidade, em PDF",
+      },
     ],
   },
   { rotulo: "Palestrantes", href: "/palestrantes" },

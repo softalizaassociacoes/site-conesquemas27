@@ -278,8 +278,8 @@ guia de onde cada bloco veio.
 - Foto de **Rodrigo Trapp** no padrão da comissão. O guia (p. 8) o cita na
   Direção Científica, mas não há arte dele em `public/images/comissoes`, então
   ele não aparece na página
-- **Logo do III ConEsquemas (2027)** em PNG/SVG com fundo transparente — o
-  cabeçalho e o rodapé usam a assinatura em texto até lá
+- Versão **clara oficial** do logo, se houver: a que está no ar é a arte
+  original recolorida por script para funcionar sobre a faixa roxa
 - **Patrocinadores e apoiadores de 2027.** Os grupos estão vazios: as marcas
   que apareciam eram da edição de 2026 e o guia ainda está captando patrocínio
 - Grade horária da programação de 2027, data e horário dos minicursos

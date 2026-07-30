@@ -45,11 +45,14 @@ export default function Footer() {
       <div className="bg-brand-800 text-brand-100">
         <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            {/* Ver nota em Header.tsx sobre a assinatura em texto. */}
-            <p className="font-display text-2xl font-semibold tracking-[0.16em] text-white">
-              CONESQUEMAS
-            </p>
-            <p className="mt-1 text-[0.7rem] font-bold uppercase tracking-[0.3em] text-blush">
+            <Image
+              src="/images/marca/logo-conesquemas-branco.png"
+              alt={evento.nomeCompleto}
+              width={900}
+              height={76}
+              className="h-5 w-auto"
+            />
+            <p className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.3em] text-blush">
               {evento.ano}
             </p>
             <p className="mt-5 max-w-sm text-sm leading-relaxed">
