@@ -258,15 +258,12 @@ material oficial enviado pelo cliente:
   inscrição) vieram do site da edição anterior, porque o guia pede o botão de
   WhatsApp e o link de inscrição sem informar os valores.
 
-Os botões de ação levam à **página do evento na plataforma**
-(`eventos.softaliza.com.br/iii-conesquemas`). Como ela ainda exibe "Inscrições
-em breve" e oferece uma lista de espera, o rótulo é **"Avise-me quando abrir"**,
-e não "Inscreva-se" — o texto do botão combina com o que a pessoa encontra ao
-clicar.
+Os botões **"Inscreva-se"** levam à página do evento na plataforma
+(`eventos.softaliza.com.br/iii-conesquemas#newsletter`). A âncora abre direto o
+formulário, que até 07/08/2026 funciona como lista de espera.
 
-> **Em 07/08/2026, quando as inscrições abrirem:** troque `inscricaoRotulo`
-> para `"Inscreva-se"` e remova a âncora `#newsletter` de `inscricaoUrl`, em
-> `src/data/evento.ts`. Os dois valores alimentam todos os botões do site, no
+> **Em 07/08/2026:** remova a âncora `#newsletter` de `inscricaoUrl`, em
+> `src/data/evento.ts`. O rótulo e a URL alimentam todos os botões do site, no
 > cabeçalho e nas páginas — não há texto solto em lugar nenhum.
 
 Não há link para a **área do participante**: ela não existe nesta edição. As

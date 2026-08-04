@@ -127,8 +127,7 @@ export default function Inscricoes() {
         <div className="mt-10">
           <AvisoDados>
             As inscrições abrem com o <strong>Lote Zero</strong>, em{" "}
-            {evento.loteZero.rotulo}. Deixe seu contato na página do evento e
-            avisamos assim que abrir.
+            {evento.loteZero.rotulo}. Garanta sua vaga na página do evento.
           </AvisoDados>
           <div className="mt-6 flex flex-wrap gap-3">
             <Botao href={evento.inscricaoUrl} externo>

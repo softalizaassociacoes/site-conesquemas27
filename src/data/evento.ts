@@ -44,16 +44,15 @@ export const evento = {
   },
 
   /**
-   * Página do evento na plataforma. Hoje ela exibe "Inscrições em breve" e
-   * oferece uma lista de espera, por isso a âncora #newsletter e o rótulo
-   * abaixo falam em ser avisado, e não em se inscrever.
+   * Página do evento na plataforma. A âncora #newsletter leva direto ao
+   * formulário, que até 07/08/2026 funciona como lista de espera.
    *
-   * Quando as inscrições abrirem, em 07/08/2026, troque `inscricaoRotulo`
-   * para "Inscreva-se" e tire a âncora da URL. É a única alteração
-   * necessária: todos os botões do site leem estes dois valores.
+   * Estes dois valores alimentam todos os botões do site, no cabeçalho e nas
+   * páginas — nenhum tem texto próprio. Quando as inscrições abrirem, basta
+   * tirar a âncora da URL.
    */
   inscricaoUrl: "https://eventos.softaliza.com.br/iii-conesquemas#newsletter",
-  inscricaoRotulo: "Avise-me quando abrir",
+  inscricaoRotulo: "Inscreva-se",
 
   /** Meta Pixel — Guia, p. 4. */
   pixelId: "622935097150845",
