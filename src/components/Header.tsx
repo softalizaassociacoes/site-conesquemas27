@@ -291,6 +291,18 @@ export default function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          <a
+            href={evento.inscricaoUrl}
+            target="_blank"
+            rel="noreferrer"
+            className={`hidden rounded-full px-5 py-2.5 text-sm font-bold uppercase tracking-wide transition sm:inline-block ${
+              sobreposto
+                ? "bg-white/15 text-white ring-1 ring-white/40 backdrop-blur hover:bg-white/25"
+                : "bg-plum-500 text-white shadow-sm hover:bg-plum-600"
+            }`}
+          >
+            {evento.inscricaoRotulo}
+          </a>
           <button
             type="button"
             onClick={() => setAberto((v) => !v)}
@@ -400,6 +412,14 @@ export default function Header() {
               ))}
             </ul>
 
+            <a
+              href={evento.inscricaoUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 block rounded-full bg-plum-500 px-6 py-3.5 text-center font-semibold text-white"
+            >
+              {evento.inscricaoRotulo}
+            </a>
           </nav>
         </div>
       )}

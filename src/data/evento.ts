@@ -43,14 +43,17 @@ export const evento = {
     youtube: "https://www.youtube.com/@ceppa.cursos",
   },
 
-  /*
-   * A plataforma de inscrição e a área do congressista ainda não existem para
-   * esta edição, então o site não linka para nenhuma das duas: os CTAs levam à
-   * página /inscricoes, com valores, lotes e regulamento.
+  /**
+   * Página do evento na plataforma. Hoje ela exibe "Inscrições em breve" e
+   * oferece uma lista de espera, por isso a âncora #newsletter e o rótulo
+   * abaixo falam em ser avisado, e não em se inscrever.
    *
-   * Quando a plataforma abrir, reponha aqui a URL (inscricaoUrl) e volte a
-   * apontar os botões de "Inscreva-se" para ela.
+   * Quando as inscrições abrirem, em 07/08/2026, troque `inscricaoRotulo`
+   * para "Inscreva-se" e tire a âncora da URL. É a única alteração
+   * necessária: todos os botões do site leem estes dois valores.
    */
+  inscricaoUrl: "https://eventos.softaliza.com.br/iii-conesquemas#newsletter",
+  inscricaoRotulo: "Avise-me quando abrir",
 
   /** Meta Pixel — Guia, p. 4. */
   pixelId: "622935097150845",
