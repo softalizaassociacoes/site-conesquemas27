@@ -6,6 +6,132 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "port": 3000
+    },
+    {
+      "name": "acat-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "../sites-acat",
+        "--",
+        "--port",
+        "3100"
+      ],
+      "port": 3100
+    },
+    {
+      "name": "sbcs-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "../sites-sbcs",
+        "--",
+        "--port",
+        "3300"
+      ],
+      "port": 3300
+    },
+    {
+      "name": "abrapee-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "../sites-abrapee",
+        "--",
+        "--port",
+        "3400"
+      ],
+      "port": 3400
+    },
+    {
+      "name": "abpsigero-prod",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "start",
+        "--prefix",
+        "../sites-abpsigero",
+        "--",
+        "--port",
+        "3501"
+      ],
+      "port": 3501
+    },
+    {
+      "name": "abpsigero-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "../sites-abpsigero",
+        "--",
+        "--port",
+        "3500"
+      ],
+      "port": 3500
+    },
+    {
+      "name": "asmevfsa-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "../sites-asmevfsa",
+        "--",
+        "--port",
+        "3600"
+      ],
+      "port": 3600
+    },
+    {
+      "name": "sbtox-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "../sites-sbtox",
+        "--",
+        "--port",
+        "3700"
+      ],
+      "port": 3700
+    },
+    {
+      "name": "sbmz-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "../sites-sbmz",
+        "--",
+        "--port",
+        "3210"
+      ],
+      "port": 3210
+    },
+    {
+      "name": "wans-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev",
+        "--prefix",
+        "../sites-wans",
+        "--",
+        "--port",
+        "3800"
+      ],
+      "port": 3800
     }
   ]
 }
