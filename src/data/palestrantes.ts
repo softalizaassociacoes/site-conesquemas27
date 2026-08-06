@@ -138,4 +138,34 @@ export const palestrantes2027: Palestrante[] = [
     nome: "Luiza Deslandes",
     foto: "/images/palestrantes/Luiza Deslandes.png",
   },
+  {
+    slug: "daniela-di-giorgio-schneider",
+    nome: "Daniela Di Giorgio Schneider",
+    foto: "/images/palestrantes/Daniela Di Giorgio Schneider.jpg",
+  },
+  {
+    slug: "giulia-altera",
+    nome: "Giulia Altera",
+    foto: "/images/palestrantes/Giulia Altera.jpg",
+  },
+  {
+    slug: "lais-costa-de-carvalho",
+    nome: "Laís Costa de Carvalho",
+    foto: "/images/palestrantes/Laís Costa de Carvalho.jpg",
+  },
+  {
+    slug: "leopoldo-barbosa",
+    nome: "Leopoldo Barbosa",
+    foto: "/images/palestrantes/Leopoldo Barbosa.jpg",
+  },
+  {
+    slug: "silvana-correa",
+    nome: "Silvana Corrêa",
+    foto: "/images/palestrantes/Silvana Corrêa.jpg",
+  },
+  {
+    slug: "walkyria-pinto-ribeiro",
+    nome: "Walkyria Pinto Ribeiro",
+    foto: "/images/palestrantes/Walkyria Pinto Ribeiro.jpg",
+  },
 ];
