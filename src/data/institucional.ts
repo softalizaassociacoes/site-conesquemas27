@@ -83,11 +83,8 @@ export const preRequisitos = [
 ];
 
 /**
- * A comissão é exatamente quem está em public/images/comissoes — os cargos
- * saem do nome de cada arquivo.
- *
- * Observação: o guia (p. 8) também cita Rodrigo Trapp na Direção Científica,
- * mas não há foto dele nessa pasta; entra aqui quando a arte for enviada.
+ * Comissão organizadora: exatamente quem está em public/images/comissoes — os
+ * cargos saem do nome de cada arquivo.
  */
 export const comissoes = [
   {
@@ -110,6 +107,17 @@ export const comissoes = [
     nome: "Pollyanna Beul",
     foto: "/images/comissoes/Pollyanna Beul - Head de Marketing.png",
   },
+];
+
+/**
+ * Comissão científica. Vai sem foto de propósito: o cliente enviou só os nomes
+ * e os cargos. Quando as artes chegarem, basta acrescentar `foto` aqui e
+ * reaproveitar a grade da comissão organizadora — as fotos precisam ser WebP
+ * de 720x900, pelo mesmo motivo descrito em src/data/palestrantes.ts.
+ */
+export const comissaoCientifica = [
+  { cargo: "Direção Científica", nome: "Rodrigo Trapp" },
+  { cargo: "Comissão Científica", nome: "Silvana Corrêa" },
 ];
 
 export const comissoesIntro =

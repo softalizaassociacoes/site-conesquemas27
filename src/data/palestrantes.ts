@@ -9,7 +9,8 @@ export type Palestrante = {
  *
  * A ordem abaixo é a definida pelo cliente e não deve ser alterada — não é
  * alfabética nem por titulação. Os nomes vão sem título acadêmico, também a
- * pedido dele.
+ * pedido dele. Quem chega depois entra no fim, salvo pedido explícito de
+ * subir, como foi o caso de Giulia Altera.
  *
  * As fotos são as oficiais, em public/images/palestrantes, uma por slug. Os
  * originais (PNG de até 3 MB) foram convertidos para WebP de 720x900 — mesmo
@@ -30,6 +31,12 @@ export const palestrantes2027: Palestrante[] = [
     slug: "rodrigo-trapp",
     nome: "Rodrigo Trapp",
     foto: "/images/palestrantes/rodrigo-trapp.webp",
+  },
+  // Subiu para cá a pedido do cliente; entrou depois dos demais.
+  {
+    slug: "giulia-altera",
+    nome: "Giulia Altera",
+    foto: "/images/palestrantes/giulia-altera.webp",
   },
   {
     slug: "ana-rizzon",
@@ -140,5 +147,30 @@ export const palestrantes2027: Palestrante[] = [
     slug: "luiza-deslandes",
     nome: "Luiza Deslandes",
     foto: "/images/palestrantes/luiza-deslandes.webp",
+  },
+  {
+    slug: "daniela-di-giorgio-schneider",
+    nome: "Daniela Di Giorgio Schneider",
+    foto: "/images/palestrantes/daniela-di-giorgio-schneider.webp",
+  },
+  {
+    slug: "lais-costa-de-carvalho",
+    nome: "Laís Costa de Carvalho",
+    foto: "/images/palestrantes/lais-costa-de-carvalho.webp",
+  },
+  {
+    slug: "leopoldo-barbosa",
+    nome: "Leopoldo Barbosa",
+    foto: "/images/palestrantes/leopoldo-barbosa.webp",
+  },
+  {
+    slug: "vanessa-eletherio",
+    nome: "Vanessa Eletherio",
+    foto: "/images/palestrantes/vanessa-eletherio.webp",
+  },
+  {
+    slug: "walkyria-pinto-ribeiro",
+    nome: "Walkyria Pinto Ribeiro",
+    foto: "/images/palestrantes/walkyria-pinto-ribeiro.webp",
   },
 ];
