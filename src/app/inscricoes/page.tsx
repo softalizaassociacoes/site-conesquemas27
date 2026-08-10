@@ -24,7 +24,7 @@ import { politicaInscricoes } from "@/data/institucional";
 export const metadata: Metadata = {
   title: "Inscrições",
   description:
-    "Valores, lotes e regulamento de inscrição do III ConEsquemas 2027. Lote Zero com 25% de desconto por 24 horas.",
+    "Valores, lotes e regulamento de inscrição do III ConEsquemas 2027. Lote 01 em vigor até 30/09/2026.",
 };
 
 export default function Inscricoes() {
@@ -36,19 +36,21 @@ export default function Inscricoes() {
         descricao="As inscrições funcionam por lotes e os valores aumentam a cada novo lote. Quanto antes você garantir sua vaga, melhor a condição."
       />
 
-      {/* Lote Zero */}
+      {/* Lote em vigor — a contagem corre para o fim dele, não para a abertura. */}
       <section className="border-b border-plum-100 bg-plum-50">
         <div className="container-page flex flex-col items-center gap-6 py-10 text-center lg:flex-row lg:justify-between lg:text-left">
           <div>
-            <p className="eyebrow mb-2">Lote Zero · {evento.loteZero.duracaoRotulo}</p>
+            <p className="eyebrow mb-2">
+              {evento.loteVigente.rotulo} · em vigor
+            </p>
             <h2 className="text-xl text-brand-800 sm:text-2xl">
-              {evento.loteZero.descontoRotulo}
+              Inscrições abertas {evento.loteVigente.periodoRotulo}
             </h2>
             <p className="mt-1.5 text-sm text-brand-600">
-              De {evento.loteZero.rotulo}
+              Depois desta data, os valores sobem para o próximo lote.
             </p>
           </div>
-          <Countdown alvo={evento.loteZero.inicioISO} />
+          <Countdown alvo={evento.loteVigente.fimISO} />
         </div>
       </section>
 
@@ -79,7 +81,7 @@ export default function Inscricoes() {
                     key={lote.rotulo}
                     className={`flex items-baseline justify-between gap-3 px-6 py-4 ${
                       lote.destaque ? "bg-plum-50" : ""
-                    }`}
+                    } ${lote.encerrado ? "bg-brand-50/60" : ""}`}
                   >
                     <div>
                       <p
@@ -88,13 +90,24 @@ export default function Inscricoes() {
                         }`}
                       >
                         {lote.rotulo}
-                        {lote.destaque && " · 25% off"}
+                        {lote.destaque && " · Lote vigente"}
+                        {lote.encerrado && " · Encerrado"}
                       </p>
-                      <p className="mt-0.5 text-xs text-brand-500">
+                      <p
+                        className={`mt-0.5 text-xs ${
+                          lote.encerrado ? "text-brand-400" : "text-brand-500"
+                        }`}
+                      >
                         {lote.periodo}
                       </p>
                     </div>
-                    <p className="shrink-0 font-display text-lg font-semibold text-brand-800">
+                    <p
+                      className={`shrink-0 font-display text-lg font-semibold ${
+                        lote.encerrado
+                          ? "text-brand-300 line-through"
+                          : "text-brand-800"
+                      }`}
+                    >
                       {formatarBRL(lote.valor)}
                     </p>
                   </li>
@@ -126,8 +139,10 @@ export default function Inscricoes() {
 
         <div className="mt-10">
           <AvisoDados>
-            As inscrições abrem com o <strong>Lote Zero</strong>, em{" "}
-            {evento.loteZero.rotulo}. Garanta sua vaga na página do evento.
+            As inscrições estão abertas no{" "}
+            <strong>{evento.loteVigente.rotulo}</strong>,{" "}
+            {evento.loteVigente.periodoRotulo}. Garanta sua vaga na página do
+            evento.
           </AvisoDados>
           <div className="mt-6 flex flex-wrap gap-3">
             <Botao href={evento.inscricaoUrl} externo>

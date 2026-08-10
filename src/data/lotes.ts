@@ -7,7 +7,10 @@ export type Lote = {
   rotulo: string;
   valor: number;
   periodo: string;
+  /** Lote em vigor. Só um por categoria — é ele que recebe o destaque. */
   destaque?: boolean;
+  /** Lote já vencido: some do destaque e vai para o cinza, com valor riscado. */
+  encerrado?: boolean;
 };
 
 export type CategoriaInscricao = {
@@ -16,6 +19,16 @@ export type CategoriaInscricao = {
   descricao: string;
   lotes: Lote[];
 };
+
+/**
+ * Lote em vigor de uma categoria. Vale para a home, que anuncia "a partir de".
+ *
+ * Na virada de lote, mova `destaque` e marque o anterior como `encerrado`: a
+ * tabela, o preço da home e o banner acompanham sozinhos.
+ */
+export function loteEmVigor(categoria: CategoriaInscricao) {
+  return categoria.lotes.find((l) => l.destaque) ?? categoria.lotes[0];
+}
 
 const periodos = {
   lote00: "07/08 (13h) a 08/08/2026 (13h)",
@@ -32,8 +45,8 @@ export const categorias: CategoriaInscricao[] = [
     descricao:
       "Exige comprovante atualizado de matrícula no ato da inscrição.",
     lotes: [
-      { rotulo: "Lote 00", valor: 634.75, periodo: periodos.lote00, destaque: true },
-      { rotulo: "Lote 01", valor: 846.33, periodo: periodos.lote01 },
+      { rotulo: "Lote 00", valor: 634.75, periodo: periodos.lote00, encerrado: true },
+      { rotulo: "Lote 01", valor: 846.33, periodo: periodos.lote01, destaque: true },
       { rotulo: "Lote 02", valor: 926.33, periodo: periodos.lote02 },
       { rotulo: "Lote 03", valor: 1006.33, periodo: periodos.lote03 },
       { rotulo: "Lote 04", valor: 1086.33, periodo: periodos.lote04 },
@@ -45,8 +58,8 @@ export const categorias: CategoriaInscricao[] = [
     descricao:
       "Lato sensu, mestrado, doutorado e pós-doutorado, mediante comprovante.",
     lotes: [
-      { rotulo: "Lote 00", valor: 709.75, periodo: periodos.lote00, destaque: true },
-      { rotulo: "Lote 01", valor: 946.33, periodo: periodos.lote01 },
+      { rotulo: "Lote 00", valor: 709.75, periodo: periodos.lote00, encerrado: true },
+      { rotulo: "Lote 01", valor: 946.33, periodo: periodos.lote01, destaque: true },
       { rotulo: "Lote 02", valor: 1046.33, periodo: periodos.lote02 },
       { rotulo: "Lote 03", valor: 1146.33, periodo: periodos.lote03 },
       { rotulo: "Lote 04", valor: 1246.33, periodo: periodos.lote04 },
@@ -58,8 +71,8 @@ export const categorias: CategoriaInscricao[] = [
     descricao:
       "Psicólogos, terapeutas e demais profissionais da saúde e educação.",
     lotes: [
-      { rotulo: "Lote 00", valor: 784.75, periodo: periodos.lote00, destaque: true },
-      { rotulo: "Lote 01", valor: 1046.33, periodo: periodos.lote01 },
+      { rotulo: "Lote 00", valor: 784.75, periodo: periodos.lote00, encerrado: true },
+      { rotulo: "Lote 01", valor: 1046.33, periodo: periodos.lote01, destaque: true },
       { rotulo: "Lote 02", valor: 1166.33, periodo: periodos.lote02 },
       { rotulo: "Lote 03", valor: 1286.33, periodo: periodos.lote03 },
       { rotulo: "Lote 04", valor: 1406.33, periodo: periodos.lote04 },
@@ -73,7 +86,7 @@ export const formasPagamento = [
 ];
 
 export const observacoesInscricao = [
-  "O Lote Zero terá duração de apenas 24 horas, com desconto exclusivo de 25% sobre o 1º lote.",
+  "O Lote 01 vale até 30/09/2026. A cada novo lote os valores sobem, sem exceção.",
   "As inscrições só serão confirmadas após o pagamento.",
   "Para categorias estudantis, será obrigatório apresentar comprovante atualizado de matrícula no ato da inscrição.",
   "Inscrições com documentação pendente serão automaticamente reclassificadas para a categoria Profissional.",

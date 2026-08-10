@@ -12,11 +12,13 @@ import { evento, edicaoAnterior } from "@/data/evento";
 import { descricaoEvento, pilares } from "@/data/institucional";
 import { carrossel, minicursos } from "@/data/minicursos";
 import { palestrantes2027 } from "@/data/palestrantes";
-import { categorias, formatarBRL } from "@/data/lotes";
+import { categorias, formatarBRL, loteEmVigor } from "@/data/lotes";
 import { siteEdicao2026 } from "@/data/navegacao";
 
 export default function Home() {
-  const menorLoteZero = Math.min(...categorias.map((c) => c.lotes[0].valor));
+  const menorLoteVigente = Math.min(
+    ...categorias.map((c) => loteEmVigor(c).valor)
+  );
 
   return (
     <>
@@ -80,23 +82,22 @@ export default function Home() {
         <Onda />
       </section>
 
-      {/* Lote Zero */}
+      {/* Lote em vigor — a contagem corre para o fim dele, não para a abertura. */}
       <section className="border-b border-plum-100 bg-plum-50">
         <div className="container-page flex flex-col items-center gap-6 py-8 text-center lg:flex-row lg:justify-between lg:text-left">
           <div>
             <p className="eyebrow mb-2">
-              Lote Zero · {evento.loteZero.duracaoRotulo}
+              {evento.loteVigente.rotulo} · em vigor
             </p>
             <p className="text-lg font-semibold text-brand-800 sm:text-xl">
-              {evento.loteZero.descontoRotulo}, a partir de{" "}
-              {formatarBRL(menorLoteZero)}
+              Inscrições abertas, a partir de {formatarBRL(menorLoteVigente)}
             </p>
             <p className="mt-1 text-sm text-brand-600">
-              De {evento.loteZero.rotulo}. Vagas limitadas.
+              Vale {evento.loteVigente.periodoRotulo}. Vagas limitadas.
             </p>
           </div>
           <div className="flex flex-col items-center gap-4 sm:flex-row">
-            <Countdown alvo={evento.loteZero.inicioISO} />
+            <Countdown alvo={evento.loteVigente.fimISO} />
             <Botao href="/inscricoes">Ver valores</Botao>
           </div>
         </div>
@@ -255,8 +256,8 @@ export default function Home() {
           <div>
             <SectionTitle
               rotulo="Fique por dentro"
-              titulo="Não perca a abertura do Lote Zero"
-              descricao="São apenas 24 horas com 25% de desconto sobre o 1º lote. Deixe seu contato e avisamos antes de abrir."
+              titulo="Não perca a virada de lote"
+              descricao="O Lote 01 vale até 30/09/2026 e depois os valores sobem. Deixe seu contato e avisamos antes de cada mudança."
             />
             <div className="flex flex-wrap gap-3">
               <Botao href={evento.redes.instagram} externo variante="secundario">

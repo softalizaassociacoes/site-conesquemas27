@@ -57,8 +57,8 @@ export default function LeadForm() {
         </p>
         <h3 className="mt-3 text-xl text-brand-800">Contato registrado!</h3>
         <p className="mt-2 text-sm leading-relaxed text-brand-600">
-          Você será avisado assim que o Lote Zero abrir. Fique de olho no seu
-          e-mail e no WhatsApp.
+          Você será avisado antes da virada de lote. Fique de olho no seu e-mail
+          e no WhatsApp.
         </p>
         <button
           type="button"

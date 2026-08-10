@@ -57,13 +57,17 @@ export const evento = {
   /** Meta Pixel — Guia, p. 4. */
   pixelId: "622935097150845",
 
-  /** Lote Zero: 24 horas, 25% de desconto sobre o 1º lote. */
-  loteZero: {
-    inicioISO: "2026-08-07T13:00:00-03:00",
-    fimISO: "2026-08-08T13:00:00-03:00",
-    rotulo: "07/08/2026 (13h) a 08/08/2026 (13h)",
-    descontoRotulo: "25% de desconto sobre o 1º lote",
-    duracaoRotulo: "24 horas",
+  /**
+   * Lote em vigor, usado nos banners da home e da página de inscrições.
+   *
+   * O Lote Zero (24h, 25% off) encerrou em 08/08/2026 e saiu do ar. Na virada
+   * de lote, atualize os três campos aqui e mova `destaque`/`encerrado` em
+   * src/data/lotes.ts — não há outro lugar com essas datas.
+   */
+  loteVigente: {
+    rotulo: "Lote 01",
+    fimISO: "2026-09-30T23:59:59-03:00",
+    periodoRotulo: "até 30/09/2026",
   },
 
   cargaHoraria: {

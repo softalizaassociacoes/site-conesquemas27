@@ -121,7 +121,7 @@ export default function Contato() {
           <SectionTitle
             rotulo="Fique por dentro"
             titulo="Receba as novidades do congresso"
-            descricao="Editais, prazos e a abertura do Lote Zero direto no seu e-mail e WhatsApp."
+            descricao="Editais, prazos e as viradas de lote direto no seu e-mail e WhatsApp."
           />
           <LeadForm />
         </div>
