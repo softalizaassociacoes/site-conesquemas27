@@ -159,11 +159,6 @@ export const palestrantes2027: Palestrante[] = [
     foto: "/images/palestrantes/lais-costa-de-carvalho.webp",
   },
   {
-    slug: "leopoldo-barbosa",
-    nome: "Leopoldo Barbosa",
-    foto: "/images/palestrantes/leopoldo-barbosa.webp",
-  },
-  {
     slug: "vanessa-eletherio",
     nome: "Vanessa Eletherio",
     foto: "/images/palestrantes/vanessa-eletherio.webp",
@@ -172,5 +167,15 @@ export const palestrantes2027: Palestrante[] = [
     slug: "walkyria-pinto-ribeiro",
     nome: "Walkyria Pinto Ribeiro",
     foto: "/images/palestrantes/walkyria-pinto-ribeiro.webp",
+  },
+  {
+    slug: "jacqueline-leao",
+    nome: "Jacqueline Leão",
+    foto: "/images/palestrantes/jacqueline-leao.webp",
+  },
+  {
+    slug: "adriana-maia-lenzi",
+    nome: "Adriana Maia Lenzi",
+    foto: "/images/palestrantes/adriana-maia-lenzi.webp",
   },
 ];
