@@ -257,7 +257,7 @@ export default function Home() {
             <SectionTitle
               rotulo="Fique por dentro"
               titulo="Não perca a virada de lote"
-              descricao="O Lote 01 vale até 30/09/2026 e depois os valores sobem. Deixe seu contato e avisamos antes de cada mudança."
+              descricao="O Lote 02 vale até 30/11/2026 e depois os valores sobem. Deixe seu contato e avisamos antes de cada mudança."
             />
             <div className="flex flex-wrap gap-3">
               <Botao href={evento.redes.instagram} externo variante="secundario">

@@ -65,9 +65,9 @@ export const evento = {
    * src/data/lotes.ts — não há outro lugar com essas datas.
    */
   loteVigente: {
-    rotulo: "Lote 01",
-    fimISO: "2026-09-30T23:59:59-03:00",
-    periodoRotulo: "até 30/09/2026",
+    rotulo: "Lote 02",
+    fimISO: "2026-11-30T23:59:59-03:00",
+    periodoRotulo: "até 30/11/2026",
   },
 
   cargaHoraria: {

@@ -46,8 +46,8 @@ export const categorias: CategoriaInscricao[] = [
       "Exige comprovante atualizado de matrícula no ato da inscrição.",
     lotes: [
       { rotulo: "Lote 00", valor: 634.75, periodo: periodos.lote00, encerrado: true },
-      { rotulo: "Lote 01", valor: 846.33, periodo: periodos.lote01, destaque: true },
-      { rotulo: "Lote 02", valor: 926.33, periodo: periodos.lote02 },
+      { rotulo: "Lote 01", valor: 846.33, periodo: periodos.lote01, encerrado: true },
+      { rotulo: "Lote 02", valor: 926.33, periodo: periodos.lote02, destaque: true },
       { rotulo: "Lote 03", valor: 1006.33, periodo: periodos.lote03 },
       { rotulo: "Lote 04", valor: 1086.33, periodo: periodos.lote04 },
     ],
@@ -59,8 +59,8 @@ export const categorias: CategoriaInscricao[] = [
       "Lato sensu, mestrado, doutorado e pós-doutorado, mediante comprovante.",
     lotes: [
       { rotulo: "Lote 00", valor: 709.75, periodo: periodos.lote00, encerrado: true },
-      { rotulo: "Lote 01", valor: 946.33, periodo: periodos.lote01, destaque: true },
-      { rotulo: "Lote 02", valor: 1046.33, periodo: periodos.lote02 },
+      { rotulo: "Lote 01", valor: 946.33, periodo: periodos.lote01, encerrado: true },
+      { rotulo: "Lote 02", valor: 1046.33, periodo: periodos.lote02, destaque: true },
       { rotulo: "Lote 03", valor: 1146.33, periodo: periodos.lote03 },
       { rotulo: "Lote 04", valor: 1246.33, periodo: periodos.lote04 },
     ],
@@ -72,8 +72,8 @@ export const categorias: CategoriaInscricao[] = [
       "Psicólogos, terapeutas e demais profissionais da saúde e educação.",
     lotes: [
       { rotulo: "Lote 00", valor: 784.75, periodo: periodos.lote00, encerrado: true },
-      { rotulo: "Lote 01", valor: 1046.33, periodo: periodos.lote01, destaque: true },
-      { rotulo: "Lote 02", valor: 1166.33, periodo: periodos.lote02 },
+      { rotulo: "Lote 01", valor: 1046.33, periodo: periodos.lote01, encerrado: true },
+      { rotulo: "Lote 02", valor: 1166.33, periodo: periodos.lote02, destaque: true },
       { rotulo: "Lote 03", valor: 1286.33, periodo: periodos.lote03 },
       { rotulo: "Lote 04", valor: 1406.33, periodo: periodos.lote04 },
     ],
@@ -86,7 +86,7 @@ export const formasPagamento = [
 ];
 
 export const observacoesInscricao = [
-  "O Lote 01 vale até 30/09/2026. A cada novo lote os valores sobem, sem exceção.",
+  "O Lote 02 vale até 30/11/2026. A cada novo lote os valores sobem, sem exceção.",
   "As inscrições só serão confirmadas após o pagamento.",
   "Para categorias estudantis, será obrigatório apresentar comprovante atualizado de matrícula no ato da inscrição.",
   "Inscrições com documentação pendente serão automaticamente reclassificadas para a categoria Profissional.",

@@ -24,7 +24,7 @@ import { politicaInscricoes } from "@/data/institucional";
 export const metadata: Metadata = {
   title: "Inscrições",
   description:
-    "Valores, lotes e regulamento de inscrição do III ConEsquemas 2027. Lote 01 em vigor até 30/09/2026.",
+    "Valores, lotes e regulamento de inscrição do III ConEsquemas 2027. Lote 02 em vigor até 30/11/2026.",
 };
 
 export default function Inscricoes() {
