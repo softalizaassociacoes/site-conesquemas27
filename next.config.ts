@@ -29,9 +29,10 @@ const nextConfig: NextConfig = {
   },
 
   async headers() {
-    // Enquanto o site está em homologação, o cabeçalho HTTP reforça o noindex
-    // e cobre também o que não é HTML (imagens, sitemap, PDFs).
-    const indexavel = process.env.NEXT_PUBLIC_SITE_INDEXAVEL === "true";
+    // O cabeçalho HTTP acompanha src/data/evento.ts — a regra tem de ser a
+    // mesma, senão ele reimpõe o noindex que o resto do site já liberou.
+    // Cobre também o que não é HTML (imagens, sitemap, PDFs).
+    const indexavel = process.env.NEXT_PUBLIC_SITE_INDEXAVEL !== "false";
 
     return [
       {

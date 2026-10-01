@@ -54,6 +54,15 @@ export const evento = {
   inscricaoUrl: "https://eventos.softaliza.com.br/iii-conesquemas#newsletter",
   inscricaoRotulo: "Inscreva-se",
 
+  /**
+   * Área restrita da plataforma — é o mesmo botão que existe no cabeçalho do
+   * hotsite de inscrições. Leva ao login e, depois dele, às submissões de
+   * trabalhos do congressista.
+   */
+  areaRestritaUrl:
+    "https://eventos.softaliza.com.br/login?next=/minhas-submissoes",
+  areaRestritaRotulo: "Área Restrita",
+
   /** Meta Pixel — Guia, p. 4. */
   pixelId: "622935097150845",
 
@@ -98,18 +107,22 @@ export const edicaoAnterior = {
 
 /**
  * Endereço público do site. Alimenta o sitemap, o robots.txt e as tags
- * Open Graph. Enquanto está em validação, aponta para o domínio de homologação.
- * Ao migrar para o domínio definitivo, defina NEXT_PUBLIC_SITE_URL.
+ * Open Graph.
+ *
+ * É fixo de propósito: o domínio definitivo já está no ar e o apex redireciona
+ * para o www (308), então este é o endereço canônico. Deixar isso em variável
+ * de ambiente já fez o sitemap anunciar o domínio de homologação em produção.
  */
-export const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://conesquemas27.softaliza.com.br";
+export const siteUrl = "https://www.conesquemas.com.br";
 
 /**
- * Indexação por buscadores. Fica DESLIGADA por padrão: o site está em
- * homologação e não deve aparecer no Google, nem competir com o domínio
- * oficial por conteúdo duplicado.
+ * Indexação por buscadores. LIGADA por padrão desde a virada para o domínio
+ * definitivo (out/2026).
  *
- * Para liberar, na virada para o domínio definitivo, defina no ambiente:
- *   NEXT_PUBLIC_SITE_INDEXAVEL=true
+ * Ficou desligada tempo demais: o robots.txt servia `Disallow: /` e a busca do
+ * Google exibia o site sem descrição, sem logo e com um título antigo colhido
+ * de links externos ("ii conesquemas"), apesar de o <title> estar correto.
+ *
+ * Para desligar de novo, defina no ambiente: NEXT_PUBLIC_SITE_INDEXAVEL=false
  */
-export const siteIndexavel = process.env.NEXT_PUBLIC_SITE_INDEXAVEL === "true";
+export const siteIndexavel = process.env.NEXT_PUBLIC_SITE_INDEXAVEL !== "false";

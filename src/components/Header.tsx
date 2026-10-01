@@ -291,6 +291,21 @@ export default function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          {/* Mesmo acesso que o hotsite oferece no cabeçalho. Secundário, para
+              não disputar atenção com a inscrição. Some abaixo de lg: nessa
+              faixa o menu já virou hambúrguer e o espaço fica curto. */}
+          <a
+            href={evento.areaRestritaUrl}
+            target="_blank"
+            rel="noreferrer"
+            className={`hidden rounded-full px-4 py-2.5 text-sm font-bold uppercase tracking-wide transition lg:inline-block ${
+              sobreposto
+                ? "text-white/80 ring-1 ring-white/35 hover:bg-white/15 hover:text-white"
+                : "text-plum-600 ring-1 ring-plum-200 hover:bg-plum-50"
+            }`}
+          >
+            {evento.areaRestritaRotulo}
+          </a>
           <a
             href={evento.inscricaoUrl}
             target="_blank"
@@ -419,6 +434,14 @@ export default function Header() {
               className="mt-6 block rounded-full bg-plum-500 px-6 py-3.5 text-center font-semibold text-white"
             >
               {evento.inscricaoRotulo}
+            </a>
+            <a
+              href={evento.areaRestritaUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 block rounded-full px-6 py-3.5 text-center font-semibold text-plum-600 ring-1 ring-plum-200"
+            >
+              {evento.areaRestritaRotulo}
             </a>
           </nav>
         </div>
