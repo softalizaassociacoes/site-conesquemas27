@@ -83,41 +83,64 @@ export const preRequisitos = [
 ];
 
 /**
- * Comissão organizadora: exatamente quem está em public/images/comissoes — os
- * cargos saem do nome de cada arquivo.
+ * Comissão organizadora.
+ *
+ * As fotos ficam em public/images/comissoes, uma por slug, em WebP de 720x900
+ * e servidas sem o otimizador da Vercel — mesmo motivo descrito em
+ * src/data/palestrantes.ts. Para repor uma, converta antes:
+ * sharp(origem).resize({width:720,height:900,fit:"cover"}).webp({quality:82})
  */
 export const comissoes = [
   {
     cargo: "Presidência",
     nome: "Jullyanna Cardoso",
-    foto: "/images/comissoes/Presidência_ Jullyanna Cardoso.png",
+    foto: "/images/comissoes/jullyanna-cardoso.webp",
   },
   {
     cargo: "Secretária",
     nome: "Juliana Uchôa",
-    foto: "/images/comissoes/Juliana Uchôa - Secretária.png",
+    foto: "/images/comissoes/juliana-uchoa.webp",
   },
   {
     cargo: "Tesoureira",
     nome: "Sandra Barreiros",
-    foto: "/images/comissoes/Sandra Barreiros - Tesoureira.png",
+    foto: "/images/comissoes/sandra-barreiros.webp",
   },
   {
     cargo: "Head de Marketing",
     nome: "Pollyanna Beul",
-    foto: "/images/comissoes/Pollyanna Beul - Head de Marketing.png",
+    foto: "/images/comissoes/pollyanna-beul.webp",
   },
 ];
 
 /**
- * Comissão científica. Vai sem foto de propósito: o cliente enviou só os nomes
- * e os cargos. Quando as artes chegarem, basta acrescentar `foto` aqui e
- * reaproveitar a grade da comissão organizadora — as fotos precisam ser WebP
- * de 720x900, pelo mesmo motivo descrito em src/data/palestrantes.ts.
+ * Comissão científica. As artes chegaram em 07/10/2026 e a seção passou a usar
+ * a mesma grade da organizadora.
+ *
+ * Três pessoas dividem o cargo "Comissão Científica", então a lista não pode
+ * ser chaveada por cargo — é por nome que ela fica única.
  */
 export const comissaoCientifica = [
-  { cargo: "Direção Científica", nome: "Rodrigo Trapp" },
-  { cargo: "Comissão Científica", nome: "Silvana Corrêa" },
+  {
+    cargo: "Direção Científica",
+    nome: "Rodrigo Trapp",
+    foto: "/images/comissoes/rodrigo-trapp.webp",
+  },
+  {
+    cargo: "Comissão Científica",
+    nome: "Silvana Corrêa",
+    foto: "/images/comissoes/silvana-correa.webp",
+  },
+  {
+    cargo: "Comissão Científica",
+    nome: "Ana Clara Gomes",
+    foto: "/images/comissoes/ana-clara-gomes.webp",
+  },
+  {
+    cargo: "Comissão Científica",
+    nome: "Leopoldo Barbosa",
+    foto: "/images/comissoes/leopoldo-barbosa.webp",
+  },
 ];
 
 export const comissoesIntro =
