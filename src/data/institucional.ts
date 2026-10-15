@@ -264,15 +264,15 @@ export const politicaInscricoes = {
 export type Parceiro = { nome: string; logo?: string; site?: string };
 
 /**
- * Só entram marcas confirmadas para 2027.
+ * Só entram marcas confirmadas para 2027. Grupos sem marcas não são
+ * renderizados, então basta esvaziar a lista para tirar um grupo do ar.
  *
- * Os grupos "Patrocínio" e "Apoio" estão vazios de propósito: as marcas que
- * apareciam aqui (Insere, Editora Vetor, SINOPS, Hogrefe e Vínculos) eram da
- * edição de 2026 e não constam no guia de 2027, que ainda está captando
- * patrocínio. Os arquivos seguem em public/images/patrocinadores — basta
- * reinserir a marca no grupo quando o contrato for fechado.
+ * Insere, Editora Vetor, SINOPS e Hogrefe eram de 2026 e seguem fora; os
+ * arquivos continuam em public/images/patrocinadores para quando fecharem.
  *
- * Grupos sem marcas não são renderizados.
+ * As logos são PNG com fundo transparente — a faixa de parceiros fica sobre
+ * areia, e um PNG com fundo branco aparece como caixa clara no meio dela.
+ * Arte quadrada com moldura branca precisa ser recortada antes de entrar.
  */
 export const parceiros: { titulo: string; marcas: Parceiro[] }[] = [
   {
@@ -281,6 +281,17 @@ export const parceiros: { titulo: string; marcas: Parceiro[] }[] = [
       { nome: "CEPPA Cursos", logo: "/images/patrocinadores/ceppa.png" },
     ],
   },
-  { titulo: "Patrocínio", marcas: [] },
-  { titulo: "Apoio", marcas: [] },
+  {
+    titulo: "Patrocínio",
+    marcas: [
+      {
+        nome: "Vínculos Psicologia",
+        logo: "/images/patrocinadores/vinculos.png",
+      },
+    ],
+  },
+  {
+    titulo: "Apoio",
+    marcas: [{ nome: "HC Tour", logo: "/images/patrocinadores/hc-tour.png" }],
+  },
 ];
