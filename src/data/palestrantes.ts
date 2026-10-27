@@ -68,9 +68,12 @@ export const palestrantes2027: Palestrante[] = [
     nome: "Bruno Luiz Avelino Cardoso",
     foto: "/images/palestrantes/bruno-cardoso.webp",
   },
+  // Aline Reis faleceu em outubro de 2026. A pedido da organização, o card
+  // passou a ser uma homenagem: a mesma foto, em preto e branco, e o nome
+  // precedido de "Em memória de". Ela segue na posição em que já estava.
   {
     slug: "aline-reis",
-    nome: "Aline Reis",
+    nome: "Em memória de Aline Reis",
     foto: "/images/palestrantes/aline-reis.webp",
   },
   {
