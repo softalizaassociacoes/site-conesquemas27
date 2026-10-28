@@ -292,6 +292,9 @@ export const parceiros: { titulo: string; marcas: Parceiro[] }[] = [
   },
   {
     titulo: "Apoio",
-    marcas: [{ nome: "HC Tour", logo: "/images/patrocinadores/hc-tour.png" }],
+    marcas: [
+      { nome: "HC Tour", logo: "/images/patrocinadores/hc-tour.png" },
+      { nome: "ATC-PE", logo: "/images/patrocinadores/atc-pe.png" },
+    ],
   },
 ];
