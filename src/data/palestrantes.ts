@@ -181,4 +181,24 @@ export const palestrantes2027: Palestrante[] = [
     nome: "Adriana Maia Lenzi",
     foto: "/images/palestrantes/adriana-maia-lenzi.webp",
   },
+  {
+    slug: "angelis-dantas",
+    nome: "Ângelis Dantas",
+    foto: "/images/palestrantes/angelis-dantas.webp",
+  },
+  {
+    slug: "luanna-avila",
+    nome: "Luanna Ávila",
+    foto: "/images/palestrantes/luanna-avila.webp",
+  },
+  {
+    slug: "milla-kaliane",
+    nome: "Milla Kaliane",
+    foto: "/images/palestrantes/milla-kaliane.webp",
+  },
+  {
+    slug: "natasha-taques",
+    nome: "Natasha Taques",
+    foto: "/images/palestrantes/natasha-taques.webp",
+  },
 ];
