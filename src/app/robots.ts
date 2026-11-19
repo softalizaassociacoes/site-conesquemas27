@@ -11,8 +11,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      // Página de conversão do pixel — não deve ser indexada.
-      disallow: ["/obrigado", "/api/"],
+      // /obrigado é página de conversão do pixel; /admin é o painel privado.
+      disallow: ["/obrigado", "/admin", "/api/"],
     },
     sitemap: `${siteUrl}/sitemap.xml`,
   };

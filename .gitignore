@@ -32,6 +32,9 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# .env.example é só a lista de NOMES, sem nenhum valor — e precisa ser
+# versionada justamente para quem for configurar o projeto saber o que falta.
+!.env.example
 
 # vercel
 .vercel
