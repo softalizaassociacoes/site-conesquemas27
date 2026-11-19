@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { evento as medir } from "@/lib/consentimento";
 
 type Estado = "parado" | "enviando" | "ok" | "erro";
 
@@ -37,12 +38,11 @@ export default function LeadForm() {
 
       setEstado("ok");
       form.reset();
-      if (typeof window !== "undefined" && "fbq" in window) {
-        (window as unknown as { fbq: (...a: unknown[]) => void }).fbq(
-          "track",
-          "Lead",
-        );
-      }
+      // As duas medições só existem depois do aceite de cookies: sem ele,
+      // `fbq` não foi carregado e `evento` não encontra o gtag. Registram que
+      // um formulário foi enviado — nunca o que foi preenchido.
+      window.fbq?.("track", "Lead");
+      medir("lead_enviado", { pagina: window.location.pathname });
     } catch {
       setEstado("erro");
       setMensagem("Falha de conexão. Verifique sua internet e tente de novo.");

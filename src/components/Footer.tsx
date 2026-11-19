@@ -132,7 +132,13 @@ export default function Footer() {
           <div className="container-page flex flex-col items-center justify-between gap-2 py-5 text-xs text-brand-200 sm:flex-row">
             <p>
               Copyright ©{evento.ano} — Realização {evento.realizacao}. Todos os
-              direitos reservados.
+              direitos reservados.{" "}
+              <Link
+                href="/privacidade"
+                className="font-semibold transition hover:text-blush"
+              >
+                Política de privacidade
+              </Link>
             </p>
             <p>
               Desenvolvido por{" "}

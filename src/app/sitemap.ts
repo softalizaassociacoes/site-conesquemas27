@@ -16,8 +16,9 @@ const rotas = [
   { caminho: "/monitoria", prioridade: 0.5 },
   { caminho: "/faq", prioridade: 0.7 },
   { caminho: "/contato", prioridade: 0.6 },
+  { caminho: "/privacidade", prioridade: 0.3 },
   // A edição de 2026 tem site próprio (conesquemas26.softaliza.com.br) e não
-  // entra neste sitemap.
+  // entra neste sitemap. /admin é painel privado e nunca entra aqui.
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

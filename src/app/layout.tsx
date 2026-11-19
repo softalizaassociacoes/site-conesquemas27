@@ -1,11 +1,16 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, Parisienne } from "next/font/google";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import MetaPixel from "@/components/MetaPixel";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { evento, siteIndexavel, siteUrl } from "@/data/evento";
 import "./globals.css";
+
+/**
+ * Layout raiz: só o documento, as fontes e os metadados gerais.
+ *
+ * A moldura do site (cabeçalho, rodapé, aviso de cookies e medição) mora em
+ * (site)/layout.tsx. O painel administrativo fica em (admin) e tem a sua
+ * própria moldura — é assim que /admin não carrega gtag nem fbq. Grupos de
+ * rota não mudam URL: as páginas públicas continuam onde estavam.
+ */
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -72,21 +77,7 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${display.variable} ${body.variable} ${manuscrito.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
-        <MetaPixel />
-        <a
-          href="#conteudo"
-          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-60 focus:rounded-full focus:bg-plum-500 focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white"
-        >
-          Ir para o conteúdo
-        </a>
-        <Header />
-        <main id="conteudo" className="flex-1">
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppButton />
-      </body>
+      <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );
 }
