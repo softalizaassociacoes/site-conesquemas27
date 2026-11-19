@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   CLASSE_BOTAO,
@@ -27,6 +27,26 @@ export default function FormEntrar({ proximo }: { proximo: string }) {
   const [erro, setErro] = useState("");
   const [aviso, setAviso] = useState("");
   const [ocupado, setOcupado] = useState(false);
+  const caixaMensagem = useRef<HTMLDivElement>(null);
+
+  // O formulário é alto, e a resposta aparecia acima do botão que a pessoa
+  // acabou de clicar — fora da tela, em notebook. Sem isto, um erro de verdade
+  // passa por "nada aconteceu".
+  useEffect(() => {
+    if (!erro && !aviso) return;
+    caixaMensagem.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+    caixaMensagem.current?.focus();
+  }, [erro, aviso]);
+
+  /** Erro e aviso nunca convivem: o último estado é o que vale. */
+  function avisar(texto: string) {
+    setErro("");
+    setAviso(texto);
+  }
+  function falhar(texto: string) {
+    setAviso("");
+    setErro(texto);
+  }
 
   async function chamar(rota: string, corpo: unknown) {
     const r = await fetch(rota, {
@@ -56,12 +76,12 @@ export default function FormEntrar({ proximo }: { proximo: string }) {
     try {
       const r = await chamar("/api/admin/entrar", { email, senha });
       if (!r.ok) {
-        setErro(r.erro ?? "Não foi possível entrar.");
+        falhar(r.erro ?? "Não foi possível entrar.");
         return;
       }
       entrou();
     } catch {
-      setErro("Falha de conexão. Verifique a internet e tente de novo.");
+      falhar("Falha de conexão. Verifique a internet e tente de novo.");
     } finally {
       setOcupado(false);
     }
@@ -75,13 +95,13 @@ export default function FormEntrar({ proximo }: { proximo: string }) {
     try {
       const r = await chamar("/api/admin/codigo", { email });
       if (!r.ok) {
-        setErro(r.erro ?? "Não foi possível enviar o código.");
+        falhar(r.erro ?? "Não foi possível enviar o código.");
         return;
       }
-      setAviso(r.mensagem ?? "Código enviado.");
+      avisar(r.mensagem ?? "Código enviado.");
       setEtapa("definir-senha");
     } catch {
-      setErro("Falha de conexão. Verifique a internet e tente de novo.");
+      falhar("Falha de conexão. Verifique a internet e tente de novo.");
     } finally {
       setOcupado(false);
     }
@@ -98,19 +118,19 @@ export default function FormEntrar({ proximo }: { proximo: string }) {
         senha: novaSenha,
       });
       if (!r.ok) {
-        setErro(r.erro ?? "Não foi possível salvar a senha.");
+        falhar(r.erro ?? "Não foi possível salvar a senha.");
         return;
       }
       entrou();
     } catch {
-      setErro("Falha de conexão. Verifique a internet e tente de novo.");
+      falhar("Falha de conexão. Verifique a internet e tente de novo.");
     } finally {
       setOcupado(false);
     }
   }
 
   const mensagens = (
-    <>
+    <div ref={caixaMensagem} tabIndex={-1} className="space-y-4 outline-none">
       {erro && (
         <p
           role="alert"
@@ -124,7 +144,7 @@ export default function FormEntrar({ proximo }: { proximo: string }) {
           {aviso}
         </p>
       )}
-    </>
+    </div>
   );
 
   if (etapa === "senha") {
